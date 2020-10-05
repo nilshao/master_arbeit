@@ -1,0 +1,8 @@
+prefix=/home/sibohao/Desktop/master_arbeit/devel
+
+Name: preparing
+Description: Description of preparing
+Version: 0.1.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
