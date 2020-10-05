@@ -1,0 +1,8 @@
+prefix=/home/sibohao/master_arbeit/install
+
+Name: pic_reader
+Description: Description of pic_reader
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
