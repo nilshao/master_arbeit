@@ -1,4 +1,5 @@
 #!/usr/bin/env python2.7
+
 # Import ROS libraries and messages
 import rospy
 from sensor_msgs.msg import Image
@@ -9,9 +10,6 @@ from cv_bridge import CvBridge, CvBridgeError
 
 # Initialize the ROS Node named 'opencv_example', allow multiple nodes to be run with this name
 rospy.init_node('opencv_example', anonymous=True)
-
-# Print "Hello ROS!" to the Terminal and to a ROS Log file located in ~/.ros/log/loghash/*.log
-rospy.loginfo("Hello ROOOOOS!")
 
 # Initialize the CvBridge class
 bridge = CvBridge()
@@ -48,3 +46,5 @@ cv2.namedWindow("Image Window", 1)
 # Loop to keep the program from shutting down unless ROS is shut down, or CTRL+C is pressed
 while not rospy.is_shutdown():
   rospy.spin()
+
+

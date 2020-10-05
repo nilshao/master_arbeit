@@ -37,7 +37,7 @@ include_directories(
 
 
 
-catkin_install_python(PROGRAMS scripts/talker.py scripts/listener.py scripts/Get_Pic.py scripts/Get_Pic_2.py
+catkin_install_python(PROGRAMS scripts/GetImage.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
