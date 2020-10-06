@@ -792,16 +792,7 @@
 		<Unit filename="/home/sibohao/Desktop/master_arbeit/src/preparing/setup.py">
 			<Option virtualFolder="CMake Files\preparing\"/>
 		</Unit>
-		<Unit filename="/home/sibohao/Desktop/master_arbeit/src/preparing/scripts/Get_Pic.py">
-			<Option virtualFolder="CMake Files\preparing\scripts\"/>
-		</Unit>
-		<Unit filename="/home/sibohao/Desktop/master_arbeit/src/preparing/scripts/Get_Pic_2.py">
-			<Option virtualFolder="CMake Files\preparing\scripts\"/>
-		</Unit>
-		<Unit filename="/home/sibohao/Desktop/master_arbeit/src/preparing/scripts/listener.py">
-			<Option virtualFolder="CMake Files\preparing\scripts\"/>
-		</Unit>
-		<Unit filename="/home/sibohao/Desktop/master_arbeit/src/preparing/scripts/talker.py">
+		<Unit filename="/home/sibohao/Desktop/master_arbeit/src/preparing/scripts/GetImage.py">
 			<Option virtualFolder="CMake Files\preparing\scripts\"/>
 		</Unit>
 		<Unit filename="/home/sibohao/Desktop/master_arbeit/src/pic_reader/CMakeLists.txt">

@@ -57,18 +57,6 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/preparing" TYPE PROGRAM FILES "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/talker.py")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/preparing" TYPE PROGRAM FILES "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/listener.py")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/preparing" TYPE PROGRAM FILES "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/Get_Pic.py")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/preparing" TYPE PROGRAM FILES "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/Get_Pic_2.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/preparing" TYPE PROGRAM FILES "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/GetImage.py")
 endif()
 

@@ -6,28 +6,27 @@ import cv2
 from cv_bridge import CvBridge, CvBridgeError
 
 class Node():
-
     def __init__(self):
-        self.bridge = CvBridge()
+        bridge = CvBridge()
         sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
         self.pub = rospy.Publisher('imagetimer', Image,queue_size=10)
 
         cv2.namedWindow("Original Image Window", 1)
         while not rospy.is_shutdown():
-            rospy.spin()
+          rospy.spin()
 
     def image_callback(self,img_msg):
         # log some info about the image topic
         rospy.loginfo(img_msg.header)
         try:
-          cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
+          cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
         except CvBridgeError, e:
           rospy.logerr("CvBridge Error: {0}".format(e))
+        show_image(cv_image)
 
-        cv2.imshow("Original Image Window", cv_image)
+    def show_image(img):
+        cv2.imshow("Image Window", img)
         cv2.waitKey(3)
-
-
 
 
 if __name__ == '__main__':
