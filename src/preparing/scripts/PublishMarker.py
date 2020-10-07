@@ -18,7 +18,7 @@ ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
 
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
-
+pose = PoseStamped()
 # distortion coefficients from camera calibration
 matrix_coefficients = np.array([np.array([970.63427734375, 0.0, 1022.773681640625]),
                                 np.array([0.0, 970.6431884765625, 781.4906005859375]),
@@ -33,8 +33,8 @@ class Node():
    #
 
    #     cv2.namedWindow("Original Image Window", 1)
-        cv2.namedWindow("Resized Image Window", 1)
-        cv2.namedWindow("Gray Image Window", 1)
+   #     cv2.namedWindow("Resized Image Window", 1)
+   #     cv2.namedWindow("Gray Image Window", 1)
         while not rospy.is_shutdown():
             rospy.spin()
 
@@ -60,7 +60,7 @@ class Node():
 
  #       cv2.imshow("Original Image Window", pic_ori)
 
-        cv2.imshow("Resized Image Window", pic_rsz)
+ #       cv2.imshow("Resized Image Window", pic_rsz)
 
         pic_gray = cv2.cvtColor(pic_rsz, cv2.COLOR_BGR2GRAY)  # Change grayscale
 
@@ -86,6 +86,8 @@ class Node():
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i], tvec[i], 0.1)
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
 
+            # First initialize a PoseStamp message
+
 
             if(rvec is not None):
                 # we need a homogeneous matrix but OpenCV only gives us a 3x3 rotation matrix
@@ -101,8 +103,7 @@ class Node():
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
                 # To visualize in rviz
-                # First initialize a PoseStamp message
-                pose = PoseStamped()
+
 
                 #write information
                 pose.header.frame_id = "camera_frame"
@@ -117,13 +118,13 @@ class Node():
                 print (pose.pose.position)
                 print (pose.pose.orientation)
 
-                #publish how???
-                pub = rospy.Publisher('pose', PoseStamped, queue_size=1)
-                rate = rospy.Rate(2) # Hz
-                pub.publish(pose)
-                rate.sleep()
-        cv2.imshow("Gray Image Window", pic_gray)
-        cv2.waitKey(1)
+        #publish how???
+        pub = rospy.Publisher('MarkerPositionPublishing', PoseStamped, queue_size=1)
+        rate = rospy.Rate(2) # Hz
+        pub.publish(pose)
+        rate.sleep()
+        #cv2.imshow("Gray Image Window", pic_gray)
+        #cv2.waitKey(1)
 
 
 
