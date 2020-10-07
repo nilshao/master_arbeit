@@ -24,7 +24,7 @@ BUILD_GTEST:BOOL=OFF
 BUILD_SHARED_LIBS:BOOL=ON
 
 //List of ';' separated packages to exclude
-CATKIN_BLACKLIST_PACKAGES:STRING=
+CATKIN_BLACKLIST_PACKAGES:STRING=aruco_mapping
 
 //catkin devel space
 CATKIN_DEVEL_PREFIX:PATH=/home/sibohao/Desktop/master_arbeit/devel
@@ -306,6 +306,15 @@ actionlib_DIR:PATH=/opt/ros/melodic/share/actionlib/cmake
 //The directory containing a CMake configuration file for actionlib_msgs.
 actionlib_msgs_DIR:PATH=/opt/ros/melodic/share/actionlib_msgs/cmake
 
+//The directory containing a CMake configuration file for aruco.
+aruco_DIR:PATH=aruco_DIR-NOTFOUND
+
+//Value Computed by CMake
+aruco_mapping_BINARY_DIR:STATIC=/home/sibohao/Desktop/master_arbeit/build/aruco_mapping
+
+//Value Computed by CMake
+aruco_mapping_SOURCE_DIR:STATIC=/home/sibohao/Desktop/master_arbeit/src/aruco_mapping
+
 //Value Computed by CMake
 azure_kinect_ros_driver_BINARY_DIR:STATIC=/home/sibohao/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver
 
@@ -320,6 +329,9 @@ bond_DIR:PATH=/opt/ros/melodic/share/bond/cmake
 
 //The directory containing a CMake configuration file for bondcpp.
 bondcpp_DIR:PATH=/opt/ros/melodic/share/bondcpp/cmake
+
+//The directory containing a CMake configuration file for camera_calibration_parsers.
+camera_calibration_parsers_DIR:PATH=/opt/ros/melodic/share/camera_calibration_parsers/cmake
 
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/melodic/share/catkin/cmake

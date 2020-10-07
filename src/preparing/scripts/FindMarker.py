@@ -21,7 +21,7 @@ matrix_coefficients = np.array([np.array([970.63427734375, 0.0, 1022.77368164062
                                 np.array([0.0, 970.6431884765625, 781.4906005859375]),
                                 np.array([0.0, 0.0, 1.0])])
 distortion_coefficients = np.array([0.5164358615875244, -2.606694221496582, 0.00045736812171526253, -0.00019684531434904784, 1.499117374420166, 0.39795395731925964, -2.4385111331939697, 1.4303737878799438])
-#distortion_coefficients = np.array([ 0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0])
+
 class Node():
 
     def __init__(self):
@@ -49,7 +49,6 @@ class Node():
         #calculate the 50 percent of original dimensions
         width = int(pic_ori.shape[1] * scale_percent / 100)
         height = int(pic_ori.shape[0] * scale_percent / 100)
-
         # dsize
         dsize = (width, height)
 
@@ -74,7 +73,6 @@ class Node():
             res = aruco.estimatePoseSingleMarkers(corners, 0.02, (matrix_coefficients), (distortion_coefficients))
             rvec=res[0]
             tvec=res[1]
-            print("123")
           #  markerPoints=res[2]
         #     (rvec - tvec).any() # get rid of that nasty numpy value array error
             for i in range(0, ids.size):  # Iterate in markers

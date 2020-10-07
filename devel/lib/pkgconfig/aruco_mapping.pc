@@ -1,0 +1,8 @@
+prefix=/home/sibohao/Desktop/master_arbeit/devel
+
+Name: aruco_mapping
+Description: Description of aruco_mapping
+Version: 1.0.4
+Cflags: -I/home/sibohao/Desktop/master_arbeit/devel/include -I/home/sibohao/Desktop/master_arbeit/src/aruco_mapping/include
+Libs: -L${prefix}/lib 
+Requires: 
