@@ -9,7 +9,7 @@ import math
 
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
-from geometry_msgs.msg import Pose
+from geometry_msgs.msg import PoseStamped
 
 # Constant parameters used in Aruco methods
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
@@ -18,7 +18,10 @@ ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
 
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
-pose_information = Pose()
+
+# First initialize a PoseStamp message
+pose_information = PoseStamped  ()
+
 # distortion coefficients from camera calibration
 matrix_coefficients = np.array([np.array([970.63427734375, 0.0, 1022.773681640625]),
                                 np.array([0.0, 970.6431884765625, 781.4906005859375]),
@@ -86,7 +89,7 @@ class Node():
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i], tvec[i], 0.1)
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
 
-            # First initialize a PoseStamp message
+
 
 
             if(rvec is not None):
@@ -103,20 +106,22 @@ class Node():
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
                 #write information
-        #        pose_information.header.frame_id = "camera_frame"
-                pose_information.position.x = tvec[0][0][0]
-                pose_information.position.y = tvec[0][0][1]
-                pose_information.position.z = tvec[0][0][2]
-                pose_information.orientation.x = quaternion[0]
-                pose_information.orientation.y = quaternion[1]
-                pose_information.orientation.z = quaternion[2]
-                pose_information.orientation.w = quaternion[3]
+                pose_information.header.frame_id = "camera_body"
+                pose_information.header.stamp = rospy.Time.now()
 
-                print (pose_information.position)
-                print (pose_information.orientation)
+                pose_information.pose.position.x = tvec[0][0][0]
+                pose_information.pose.position.y = tvec[0][0][1]
+                pose_information.pose.position.z = tvec[0][0][2]
+                pose_information.pose.orientation.x = quaternion[0]
+                pose_information.pose.orientation.y = quaternion[1]
+                pose_information.pose.orientation.z = quaternion[2]
+                pose_information.pose.orientation.w = quaternion[3]
+
+            #    print (pose_information.position)
+            #    print (pose_information.orientation)
 
         #publish to the topic
-        pub = rospy.Publisher('MarkerPositionPublishing', Pose, queue_size=1)
+        pub = rospy.Publisher('MarkerPositionPublishing', PoseStamped, queue_size=1)
         rate = rospy.Rate(2) # Hz
         pub.publish(pose_information)
         rate.sleep()
