@@ -9,6 +9,8 @@ import math
 
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
+from geometry_msgs.msg import Pose
+from geometry_msgs.msg import PoseArray
 from geometry_msgs.msg import PoseStamped
 
 # Constant parameters used in Aruco methods
@@ -73,57 +75,62 @@ class Node():
         # lists of ids and the corners beloning to each id
 
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
-        # First initialize a PoseStamp message
-        pose_information = PoseStamped  ()
+
+        # First initialize a PoseArry message
+        pose_information = PoseArray ()
+        pose_information.header.frame_id = "camera_body"
+        pose_information.header.stamp = rospy.Time.now()
+    #    num_of_markers = 0
+
 
         if np.all(ids is not None):  # If there are markers found by detector
+            num_of_markers = ids.size
             res = aruco.estimatePoseSingleMarkers(corners, 0.02, (matrix_coefficients), (distortion_coefficients))
             rvec=res[0]
             tvec=res[1]
           #  markerPoints=res[2]
-        # get rid of that nasty numpy value array error
-        #     (rvec - tvec).any()
+
+            aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
             for i in range(0, ids.size):  # Iterate in markers
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
-                print("rvec is: ",rvec[i][0])
-                print("tvec is: ",tvec[i][0])
+                print("rvec[",i,"] is: ",rvec[i][0])
+                print("tvec[",i,"] is: ",tvec[i][0])
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i], tvec[i], 0.1)
-            aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
 
-
-
-
-            if(rvec is not None):
                 # we need a homogeneous matrix but OpenCV only gives us a 3x3 rotation matrix
                 rotation_matrix = np.array([[0, 0, 0, 0],
                                             [0, 0, 0, 0],
                                             [0, 0, 0, 0],
                                             [0, 0, 0, 1]],
                                             dtype=float)
-                rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec)
-
+                rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i])
 
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
                 #write information
-                pose_information.header.frame_id = "camera_body"
-                pose_information.header.stamp = rospy.Time.now()
 
-                pose_information.pose.position.x = tvec[0][0][0]
-                pose_information.pose.position.y = tvec[0][0][1]
-                pose_information.pose.position.z = tvec[0][0][2]
 
-                pose_information.pose.orientation.x = quaternion[0]
-                pose_information.pose.orientation.y = quaternion[1]
-                pose_information.pose.orientation.z = quaternion[2]
-                pose_information.pose.orientation.w = quaternion[3]
+                single_pose = Pose ()
+
+                single_pose.position.x = tvec[i][0][0]
+                single_pose.position.y = tvec[i][0][1]
+                single_pose.position.z = tvec[i][0][2]
+
+                single_pose.orientation.x = quaternion[0]
+                single_pose.orientation.y = quaternion[1]
+                single_pose.orientation.z = quaternion[2]
+                single_pose.orientation.w = quaternion[3]
 
             #    print (pose_information.position)
             #    print (pose_information.orientation)
 
+                pose_information.poses.append(single_pose)
+  #      pose_information.header.num = num_of_markers
+  #      print("num of marker: ", num_of_markers)
+   #     print(pose_information.pose.size())
         #publish to the topic
-        pub = rospy.Publisher('MarkerPositionPublishing', PoseStamped, queue_size=1)
+        pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
         rate = rospy.Rate(2) # Hz
         pub.publish(pose_information)
         rate.sleep()
