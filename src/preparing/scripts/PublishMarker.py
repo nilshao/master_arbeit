@@ -80,9 +80,8 @@ class Node():
             res = aruco.estimatePoseSingleMarkers(corners, 0.02, (matrix_coefficients), (distortion_coefficients))
             rvec=res[0]
             tvec=res[1]
-          #  markerPoints=res[2]
-        # get rid of that nasty numpy value array error
-        #     (rvec - tvec).any()
+  #          markerPoints=res[2]
+
             for i in range(0, ids.size):  # Iterate in markers
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
                 print("rvec is: ",rvec[i][0])
