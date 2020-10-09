@@ -18,8 +18,11 @@ from geometry_msgs.msg import PoseStamped
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
 ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
 
+
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
+
+
 
 # distortion coefficients from camera calibration
 matrix_coefficients = np.array([np.array([970.63427734375, 0.0, 1022.773681640625]),
@@ -32,6 +35,7 @@ class Node():
     def __init__(self):
         self.bridge = CvBridge()
         sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
+   #
 
    #     cv2.namedWindow("Original Image Window", 1)
    #     cv2.namedWindow("Resized Image Window", 1)
@@ -42,15 +46,17 @@ class Node():
     def image_callback(self,img_msg):
         # log some info about the image topic
         rospy.loginfo(img_msg.header)
+
         cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
+
 
         pic_ori = cv_image
 
         scale_percent = 30
-        #calculate the scale_percent of original dimensions
+
+        #calculate the 50 percent of original dimensions
         width = int(pic_ori.shape[1] * scale_percent / 100)
         height = int(pic_ori.shape[0] * scale_percent / 100)
-
         # dsize
         dsize = (width, height)
 
@@ -88,8 +94,8 @@ class Node():
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
             for i in range(0, ids.size):  # Iterate in markers
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
-                print("rvec ",i," is: ",rvec[i][0])
-                print("tvec ",i," is: ",tvec[i][0])
+                print("rvec[",i,"] is: ",rvec[i][0])
+                print("tvec[",i,"] is: ",tvec[i][0])
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i], tvec[i], 0.1)
 
                 # we need a homogeneous matrix but OpenCV only gives us a 3x3 rotation matrix
@@ -130,8 +136,8 @@ class Node():
         pub.publish(pose_information)
         rate.sleep()
 
-        cv2.imshow("Gray Image Window", pic_gray)
-        cv2.waitKey(1)
+        #cv2.imshow("Gray Image Window", pic_gray)
+        #cv2.waitKey(1)
 
 
 
