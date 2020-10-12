@@ -48,8 +48,6 @@ class Node():
         rospy.loginfo(img_msg.header)
 
         cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
-
-
         pic_ori = cv_image
 
         scale_percent = 30

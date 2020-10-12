@@ -126,7 +126,7 @@ class Node():
    #     print(pose_information.pose.size())
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
-        rate = rospy.Rate(2) # Hz
+        rate = rospy.Rate(30) # Hz
         pub.publish(pose_information)
         rate.sleep()
 
