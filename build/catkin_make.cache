@@ -1,2 +1,2 @@
-Azure_Kinect_ROS_Driver:aruco_mapping:pic_reader:preparing
--DCATKIN_BLACKLIST_PACKAGES=aruco_mapping -DCATKIN_DEVEL_PREFIX=/home/sibohao/Desktop/master_arbeit/devel -DCMAKE_INSTALL_PREFIX=/home/sibohao/Desktop/master_arbeit/install -G Unix Makefiles
+Azure_Kinect_ROS_Driver:MarkerTrailer:pic_reader:preparing
+-DCATKIN_DEVEL_PREFIX=/home/zmc/Desktop/master_arbeit/devel -DCMAKE_INSTALL_PREFIX=/home/zmc/Desktop/master_arbeit/install -G Unix Makefiles

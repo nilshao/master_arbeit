@@ -1,0 +1,8 @@
+prefix=/home/zmc/Desktop/master_arbeit/install
+
+Name: MarkerTrailer
+Description: Description of MarkerTrailer
+Version: 0.1.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -17,6 +17,7 @@ from geometry_msgs.msg import PoseStamped
 # Constant parameters used in Aruco methods
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
 ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
+ARUCO_SIZE_Meter = 0.0992
 
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
@@ -63,7 +64,6 @@ class Node():
 
         pic_gray = cv2.cvtColor(pic_rsz, cv2.COLOR_BGR2GRAY)  # Change grayscale
 
-
         aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_100)  # Use 5x5 dictionary to find markers
         parameters = aruco.DetectorParameters_create()  # Marker detection parameters
 
@@ -73,14 +73,14 @@ class Node():
 
         # First initialize a PoseArry message
         pose_information = PoseArray ()
-        pose_information.header.frame_id = "camera_body"
+        pose_information.header.frame_id = "rgb_camera_link"
         pose_information.header.stamp = rospy.Time.now()
     #    num_of_markers = 0
 
 
         if np.all(ids is not None):  # If there are markers found by detector
             num_of_markers = ids.size
-            res = aruco.estimatePoseSingleMarkers(corners, 0.02, (matrix_coefficients), (distortion_coefficients))
+            res = aruco.estimatePoseSingleMarkers(corners, ARUCO_SIZE_Meter, (matrix_coefficients), (distortion_coefficients))
             rvec=res[0]
             tvec=res[1]
           #  markerPoints=res[2]
@@ -98,25 +98,25 @@ class Node():
                                             [0, 0, 0, 0],
                                             [0, 0, 0, 1]],
                                             dtype=float)
-                rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i])
+
+                rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i][0])
 
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
                 #write information
-
-
                 single_pose = Pose ()
 
-                single_pose.position.x = tvec[i][0][0]
-                single_pose.position.y = tvec[i][0][1]
-                single_pose.position.z = tvec[i][0][2]
+                single_pose.position.x = float(tvec[i][0][0])
+                single_pose.position.y = float(tvec[i][0][1])
+                single_pose.position.z = float(tvec[i][0][2])
 
                 single_pose.orientation.x = quaternion[0]
                 single_pose.orientation.y = quaternion[1]
                 single_pose.orientation.z = quaternion[2]
                 single_pose.orientation.w = quaternion[3]
 
+                print( single_pose.position.x, single_pose.position.y , single_pose.position.z)
             #    print (pose_information.position)
             #    print (pose_information.orientation)
 
@@ -124,9 +124,10 @@ class Node():
   #      pose_information.header.num = num_of_markers
   #      print("num of marker: ", num_of_markers)
    #     print(pose_information.pose.size())
+
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
-        rate = rospy.Rate(2) # Hz
+        rate = rospy.Rate(30) # Hz
         pub.publish(pose_information)
         rate.sleep()
 
