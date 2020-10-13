@@ -17,17 +17,11 @@ from geometry_msgs.msg import PoseStamped
 # Constant parameters used in Aruco methods
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
 ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
-ARUCO_SIZE_Meter = 0.0996
+ARUCO_SIZE_METER = 0.0996
 
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
-'''
-D: [0.5164358615875244, -2.606694221496582, 0.00045736812171526253, -0.00019684531434904784, 1.499117374420166, 0.39795395731925964, -2.4385111331939697, 1.4303737878799438]
-K: [606.6464233398438, 0.0, 639.0460205078125, 0.0, 606.6519775390625, 368.244140625, 0.0, 0.0, 1.0]
-R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
-P: [606.6464233398438, 0.0, 639.0460205078125, 0.0, 0.0, 606.6519775390625, 368.244140625, 0.0, 0.0, 0.0, 1.0, 0.0]
 
-'''
 # distortion coefficients from camera calibration
 matrix_coefficients = np.array([np.array([606.6464233398438, 0.0, 639.0460205078125]),
                                 np.array([0.0, 606.6519775390625, 368.244140625]),
@@ -69,24 +63,22 @@ class Node():
  #       cv2.imshow("Resized Image Window", pic_rsz)
 
         pic_gray = cv2.cvtColor(pic_rsz, cv2.COLOR_BGR2GRAY)  # Change grayscale
-
+        pic_ori_gray = cv2.cvtColor(pic_ori, cv2.COLOR_BGR2GRAY)
         aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_100)  # Use 5x5 dictionary to find markers
         parameters = aruco.DetectorParameters_create()  # Marker detection parameters
 
         # lists of ids and the corners beloning to each id
 
-        corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
+        corners, ids, rejected_img_points = aruco.detectMarkers(pic_ori_gray,ARUCO_DICTIONARY,parameters = parameters)
 
         # First initialize a PoseArry message
         pose_information = PoseArray ()
         pose_information.header.frame_id = "rgb_camera_link"
         pose_information.header.stamp = rospy.Time.now()
-    #    num_of_markers = 0
-
 
         if np.all(ids is not None):  # If there are markers found by detector
             num_of_markers = ids.size
-            res = aruco.estimatePoseSingleMarkers(corners, ARUCO_SIZE_Meter, (matrix_coefficients), (distortion_coefficients))
+            res = aruco.estimatePoseSingleMarkers(corners, ARUCO_SIZE_METER, (matrix_coefficients), (distortion_coefficients))
             rvec=res[0]
             tvec=res[1]
           #  markerPoints=res[2]
@@ -94,9 +86,9 @@ class Node():
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
             for i in range(0, ids.size):  # Iterate in markers
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
-                print("rvec ",i," is: ",rvec[i][0])
-                print("tvec ",i," is: ",tvec[i][0])
-                aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i], tvec[i], 0.1)
+     #           print("rvec ",i," is: ",rvec[i][0])
+     #           print("tvec ",i," is: ",tvec[i][0])
+                aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i][0], tvec[i][0], 0.1)
 
                 # we need a homogeneous matrix but OpenCV only gives us a 3x3 rotation matrix
                 rotation_matrix = np.array([[0, 0, 0, 0],
@@ -122,9 +114,9 @@ class Node():
                 single_pose.orientation.z = quaternion[2]
                 single_pose.orientation.w = quaternion[3]
 
-                print( single_pose.position.x, single_pose.position.y , single_pose.position.z)
-            #    print (pose_information.position)
-            #    print (pose_information.orientation)
+                print(single_pose.position)
+                print("+++++++++++++++++++++++++++")
+                print(single_pose.orientation)
 
                 pose_information.poses.append(single_pose)
   #      pose_information.header.num = num_of_markers
@@ -137,14 +129,8 @@ class Node():
         pub.publish(pose_information)
         rate.sleep()
 
-        cv2.imshow("Gray Image Window", pic_gray)
-        cv2.waitKey(1)
-
-
-
-        #aruco.drawAxis(pic_rsz, matrix_coefficients, distortion_coefficients, rvec, tvec, 0.01)  # Draw Axis
-
-
+ #       cv2.imshow("Gray Image Window", pic_gray)
+ #       cv2.waitKey(1)
 
 if __name__ == '__main__':
     rospy.init_node("Get_Pic", anonymous=True)
