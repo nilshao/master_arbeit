@@ -17,14 +17,20 @@ from geometry_msgs.msg import PoseStamped
 # Constant parameters used in Aruco methods
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
 ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
-ARUCO_SIZE_Meter = 0.0992
+ARUCO_SIZE_Meter = 0.0996
 
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
+'''
+D: [0.5164358615875244, -2.606694221496582, 0.00045736812171526253, -0.00019684531434904784, 1.499117374420166, 0.39795395731925964, -2.4385111331939697, 1.4303737878799438]
+K: [606.6464233398438, 0.0, 639.0460205078125, 0.0, 606.6519775390625, 368.244140625, 0.0, 0.0, 1.0]
+R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+P: [606.6464233398438, 0.0, 639.0460205078125, 0.0, 0.0, 606.6519775390625, 368.244140625, 0.0, 0.0, 0.0, 1.0, 0.0]
 
+'''
 # distortion coefficients from camera calibration
-matrix_coefficients = np.array([np.array([970.63427734375, 0.0, 1022.773681640625]),
-                                np.array([0.0, 970.6431884765625, 781.4906005859375]),
+matrix_coefficients = np.array([np.array([606.6464233398438, 0.0, 639.0460205078125]),
+                                np.array([0.0, 606.6519775390625, 368.244140625]),
                                 np.array([0.0, 0.0, 1.0])])
 distortion_coefficients = np.array([0.5164358615875244, -2.606694221496582, 0.00045736812171526253, -0.00019684531434904784, 1.499117374420166, 0.39795395731925964, -2.4385111331939697, 1.4303737878799438])
 
