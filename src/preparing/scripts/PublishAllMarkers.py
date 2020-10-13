@@ -34,9 +34,6 @@ class Node():
         self.bridge = CvBridge()
         sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
 
-   #     cv2.namedWindow("Original Image Window", 1)
-   #     cv2.namedWindow("Resized Image Window", 1)
-   #     cv2.namedWindow("Gray Image Window", 1)
         while not rospy.is_shutdown():
             rospy.spin()
 
@@ -47,29 +44,14 @@ class Node():
 
         pic_ori = cv_image
 
-        scale_percent = 30
-        #calculate the scale_percent of original dimensions
-        width = int(pic_ori.shape[1] * scale_percent / 100)
-        height = int(pic_ori.shape[0] * scale_percent / 100)
+        pic_gray = cv2.cvtColor(pic_ori, cv2.COLOR_BGR2GRAY)
 
-        # dsize
-        dsize = (width, height)
-
-        # resize image
-        pic_rsz = cv2.resize(pic_ori, dsize)
-
- #       cv2.imshow("Original Image Window", pic_ori)
-
- #       cv2.imshow("Resized Image Window", pic_rsz)
-
-        pic_gray = cv2.cvtColor(pic_rsz, cv2.COLOR_BGR2GRAY)  # Change grayscale
-        pic_ori_gray = cv2.cvtColor(pic_ori, cv2.COLOR_BGR2GRAY)
         aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_100)  # Use 5x5 dictionary to find markers
         parameters = aruco.DetectorParameters_create()  # Marker detection parameters
 
         # lists of ids and the corners beloning to each id
 
-        corners, ids, rejected_img_points = aruco.detectMarkers(pic_ori_gray,ARUCO_DICTIONARY,parameters = parameters)
+        corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
 
         # First initialize a PoseArry message
         pose_information = PoseArray ()
@@ -86,8 +68,6 @@ class Node():
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
             for i in range(0, ids.size):  # Iterate in markers
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
-     #           print("rvec ",i," is: ",rvec[i][0])
-     #           print("tvec ",i," is: ",tvec[i][0])
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i][0], tvec[i][0], 0.1)
 
                 # we need a homogeneous matrix but OpenCV only gives us a 3x3 rotation matrix
@@ -96,7 +76,6 @@ class Node():
                                             [0, 0, 0, 0],
                                             [0, 0, 0, 1]],
                                             dtype=float)
-
                 rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i][0])
 
                 # convert the matrix to a quaternion
@@ -114,23 +93,13 @@ class Node():
                 single_pose.orientation.z = quaternion[2]
                 single_pose.orientation.w = quaternion[3]
 
-                print(single_pose.position)
-                print("+++++++++++++++++++++++++++")
-                print(single_pose.orientation)
-
                 pose_information.poses.append(single_pose)
-  #      pose_information.header.num = num_of_markers
-  #      print("num of marker: ", num_of_markers)
-   #     print(pose_information.pose.size())
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
         rate = rospy.Rate(30) # Hz
         pub.publish(pose_information)
         rate.sleep()
-
- #       cv2.imshow("Gray Image Window", pic_gray)
- #       cv2.waitKey(1)
 
 if __name__ == '__main__':
     rospy.init_node("Get_Pic", anonymous=True)
