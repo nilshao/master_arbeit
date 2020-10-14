@@ -23,11 +23,11 @@ ARUCO_SIZE_METER = 0.0996
 rvec, tvec = None, None
 
 # distortion coefficients from camera calibration
-matrix_coefficients = np.array([np.array([606.6464233398438, 0.0, 639.0460205078125]),
-                                np.array([0.0, 606.6519775390625, 368.244140625]),
-                                np.array([0.0, 0.0, 1.0])])
-distortion_coefficients = np.array([0.5164358615875244, -2.606694221496582, 0.00045736812171526253, -0.00019684531434904784, 1.499117374420166, 0.39795395731925964, -2.4385111331939697, 1.4303737878799438])
-
+matrix_coefficients = np.array([np.array([606.6464233398438,    0.0,                    639.0460205078125]),
+                                np.array([0.0,                  606.6519775390625,      368.244140625]),
+                                np.array([0.0,                  0.0,                    1.0])])
+distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582,     0.00045736812171526253,     -0.00019684531434904784,
+                                    1.499117374420166,      0.39795395731925964,    -2.4385111331939697,        1.4303737878799438])
 class Node():
 
     def __init__(self):
@@ -58,12 +58,15 @@ class Node():
         pose_information.header.frame_id = "rgb_camera_link"
         pose_information.header.stamp = rospy.Time.now()
 
+        # Save the poses as a dictionary
+        Marker_Dict = {}
+
         if np.all(ids is not None):  # If there are markers found by detector
             num_of_markers = ids.size
             res = aruco.estimatePoseSingleMarkers(corners, ARUCO_SIZE_METER, (matrix_coefficients), (distortion_coefficients))
             rvec=res[0]
             tvec=res[1]
-          #  markerPoints=res[2]
+#            markerPoints=res[2]
 
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
             for i in range(0, ids.size):  # Iterate in markers
@@ -94,6 +97,10 @@ class Node():
                 single_pose.orientation.w = quaternion[3]
 
                 pose_information.poses.append(single_pose)
+
+                Marker_Dict[ids[i][0]] = single_pose
+
+#        print(Marker_Dict)
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
