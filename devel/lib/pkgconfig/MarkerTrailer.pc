@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 prefix=/home/sibohao/Desktop/master_arbeit/devel
+=======
+prefix=/home/zmc/Desktop/master_arbeit/devel
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
 
 Name: MarkerTrailer
 Description: Description of MarkerTrailer

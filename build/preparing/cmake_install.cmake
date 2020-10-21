@@ -1,8 +1,8 @@
-# Install script for directory: /home/sibohao/Desktop/master_arbeit/src/preparing
+# Install script for directory: /home/zmc/Desktop/master_arbeit/src/preparing
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/sibohao/Desktop/master_arbeit/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zmc/Desktop/master_arbeit/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,25 +38,25 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/safe_execute_install.cmake")
+  include("/home/zmc/Desktop/master_arbeit/build/preparing/catkin_generated/safe_execute_install.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/preparing.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zmc/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/preparing.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/preparing/cmake" TYPE FILE FILES
-    "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/preparingConfig.cmake"
-    "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/preparingConfig-version.cmake"
+    "/home/zmc/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/preparingConfig.cmake"
+    "/home/zmc/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/preparingConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/preparing" TYPE FILE FILES "/home/sibohao/Desktop/master_arbeit/src/preparing/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/preparing" TYPE FILE FILES "/home/zmc/Desktop/master_arbeit/src/preparing/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/preparing" TYPE PROGRAM FILES "/home/sibohao/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/GetImage.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/preparing" TYPE PROGRAM FILES "/home/zmc/Desktop/master_arbeit/build/preparing/catkin_generated/installspace/GetImage.py")
 endif()
 

@@ -75,7 +75,8 @@ class Node():
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
         # First initialize a PoseStamp message
         pose_information = PoseStamped  ()
-
+        pose_information.header.frame_id = "camera_body"
+        pose_information.header.stamp = rospy.Time.now()
         if np.all(ids is not None):  # If there are markers found by detector
             res = aruco.estimatePoseSingleMarkers(corners, 0.02, (matrix_coefficients), (distortion_coefficients))
             rvec=res[0]
@@ -106,8 +107,7 @@ class Node():
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
                 #write information
-                pose_information.header.frame_id = "camera_body"
-                pose_information.header.stamp = rospy.Time.now()
+                print("quaternion",quaternion)
 
                 pose_information.pose.position.x = tvec[0][0][0]
                 pose_information.pose.position.y = tvec[0][0][1]
@@ -123,7 +123,7 @@ class Node():
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseStamped, queue_size=1)
-        rate = rospy.Rate(2) # Hz
+        rate = rospy.Rate(30) # Hz
         pub.publish(pose_information)
         rate.sleep()
 

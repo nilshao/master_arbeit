@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "azure_kinect_ros_driver"
-PROJECT_SPACE_DIR = "/home/sibohao/Desktop/master_arbeit/install"
+PROJECT_SPACE_DIR = "/home/zmc/Desktop/master_arbeit/install"
 PROJECT_VERSION = "0.9.0"
