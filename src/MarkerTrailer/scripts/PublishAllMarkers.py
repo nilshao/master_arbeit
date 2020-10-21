@@ -54,12 +54,10 @@ class Node():
         # Change grayscale
         pic_gray = cv2.cvtColor(pic_rsz, cv2.COLOR_BGR2GRAY)
 
-
         aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_100)  # Use 5x5 dictionary to find markers
         parameters = aruco.DetectorParameters_create()  # Marker detection parameters
 
         # lists of ids and the corners beloning to each id
-
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
 
         # First initialize a PoseArry message
@@ -75,6 +73,7 @@ class Node():
 
             # Draw squares around the markers
             aruco.drawDetectedMarkers(pic_gray, corners)
+
             # Iterate in markers
             for i in range(0, ids.size):
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
@@ -93,9 +92,7 @@ class Node():
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
-                #write information
-
-
+                #initialize and write information
                 single_pose = Pose ()
 
                 single_pose.position.x = tvec[i][0][0]
@@ -107,8 +104,6 @@ class Node():
                 single_pose.orientation.z = quaternion[2]
                 single_pose.orientation.w = quaternion[3]
 
-
-
                 pose_information.poses.append(single_pose)
 
         #publish to the topic
@@ -119,12 +114,6 @@ class Node():
 
         #cv2.imshow("Gray Image Window", pic_gray)
         #cv2.waitKey(1)
-
-
-
-        #aruco.drawAxis(pic_rsz, matrix_coefficients, distortion_coefficients, rvec, tvec, 0.01)  # Draw Axis
-
-
 
 if __name__ == '__main__':
     rospy.init_node("Get_Pic", anonymous=True)
