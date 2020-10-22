@@ -7,10 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/zmc/Desktop/master_arbeit/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/zmc/Desktop/master_arbeit/devel/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/zmc/Desktop/master_arbeit/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD='/home/zmc/Desktop/master_arbeit/build'
-export PYTHONPATH="/home/zmc/Desktop/master_arbeit/devel/lib/python2.7/dist-packages:$PYTHONPATH"
-export ROSLISP_PACKAGE_DIRECTORIES='/home/zmc/Desktop/master_arbeit/devel/share/common-lisp'
-export ROS_PACKAGE_PATH="/home/zmc/Desktop/master_arbeit/src:$ROS_PACKAGE_PATH"

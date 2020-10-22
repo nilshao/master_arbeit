@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ShowPic.dir/src/ShowPic.cpp.o"
-  "/home/zmc/Desktop/master_arbeit/devel/lib/pic_reader/ShowPic.pdb"
-  "/home/zmc/Desktop/master_arbeit/devel/lib/pic_reader/ShowPic"
+  "/home/zmc/Desktop/master_arbeit/devel/lib/pic_reader/======ShowPic.pdb"
+  "/home/zmc/Desktop/master_arbeit/devel/lib/pic_reader/======ShowPic"
 )
 
 # Per-language clean rules from dependency scanning.
