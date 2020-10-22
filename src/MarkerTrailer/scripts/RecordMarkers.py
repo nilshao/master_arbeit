@@ -41,6 +41,7 @@ class Node():
     def image_callback(self,img_msg):
         # log some info about the image topic
         rospy.loginfo(img_msg.header)
+
         cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
 
         pic_ori = cv_image
@@ -58,6 +59,9 @@ class Node():
         pose_information = PoseArray ()
         pose_information.header.frame_id = "rgb_camera_link"
         pose_information.header.stamp = rospy.Time.now()
+
+        txt_record = open("Try1.txt", "a")
+        txt_record.write("%i " % (img_msg.header.seq))
 
         if np.all(ids is not None):  # If there are markers found by detector
             num_of_markers = ids.size
@@ -96,10 +100,11 @@ class Node():
 
                 pose_information.poses.append(single_pose)
                 print("tvec is: ",tvec[i][0])
-                f = open("Try1.txt", "a")
 
-                f.write("%5.8f %5.8f %5.8f\n" % (tvec[i][0][0], tvec[i][0][1],tvec[i][0][2]))
-                f.close()
+                txt_record.write("%5.8f %5.8f %5.8f" % (tvec[i][0][0], tvec[i][0][1],tvec[i][0][2]))
+
+        txt_record.write("\n")
+        txt_record.close()
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)

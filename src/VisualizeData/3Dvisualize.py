@@ -15,10 +15,11 @@ ax = Axes3D(fig)
 for line in data.readlines():
     curline = line.strip().split(" ")
     floatLine = map(float,curline)
-    x.append(floatLine[0])
-    y.append(floatLine[1])
-    z.append(floatLine[2])
-
+    if len(floatLine)>1:
+        x.append(floatLine[1])
+        y.append(floatLine[2])
+        z.append(floatLine[3])
+    
 #ax.plot(x,y,z)
 ax.scatter(x,y,z)
 ax.set_xlabel('x')
@@ -27,5 +28,4 @@ ax.set_zlabel('z')
 
 plt.show()
 data.close()
-
 
