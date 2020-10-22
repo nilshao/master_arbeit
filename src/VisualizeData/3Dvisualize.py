@@ -19,7 +19,12 @@ for line in data.readlines():
     y.append(floatLine[1])
     z.append(floatLine[2])
 
-ax.plot(x,y,z)
+#ax.plot(x,y,z)
+ax.scatter(x,y,z)
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+
 plt.show()
 data.close()
 
