@@ -14,6 +14,7 @@ from geometry_msgs.msg import Pose
 from geometry_msgs.msg import PoseArray
 from geometry_msgs.msg import PoseStamped
 
+
 # Constant parameters used in Aruco methods
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
 ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
@@ -96,16 +97,19 @@ class Node():
                 single_pose.orientation.z = quaternion[2]
                 single_pose.orientation.w = quaternion[3]
 
+                print("rvec",rvec[i][0])
+                print("tvec",tvec[i][0])
                 pose_information.poses.append(single_pose)
 
                 Marker_Dict[ids[i][0]] = single_pose
 
+
 #        print(Marker_Dict)
 
         #publish to the topic
-        pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
+        pub1 = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
         rate = rospy.Rate(30) # Hz
-        pub.publish(pose_information)
+        pub1.publish(pose_information)
         rate.sleep()
 
 if __name__ == '__main__':
