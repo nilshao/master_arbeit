@@ -43,10 +43,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/sibohao/Desktop/master_arbeit/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/sibohao/Desktop/master_arbeit/build
+=======
 CMAKE_SOURCE_DIR = /home/zmc/Desktop/master_arbeit/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/zmc/Desktop/master_arbeit/build
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
 
 # Utility rule file for _catkin_empty_exported_target.
 
@@ -63,10 +70,18 @@ MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/build: _catkin_empty_
 .PHONY : MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/build
 
 MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/clean:
+<<<<<<< HEAD
+	cd /home/sibohao/Desktop/master_arbeit/build/MarkerTrailer && $(CMAKE_COMMAND) -P CMakeFiles/_catkin_empty_exported_target.dir/cmake_clean.cmake
+.PHONY : MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/clean
+
+MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/depend:
+	cd /home/sibohao/Desktop/master_arbeit/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sibohao/Desktop/master_arbeit/src /home/sibohao/Desktop/master_arbeit/src/MarkerTrailer /home/sibohao/Desktop/master_arbeit/build /home/sibohao/Desktop/master_arbeit/build/MarkerTrailer /home/sibohao/Desktop/master_arbeit/build/MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake --color=$(COLOR)
+=======
 	cd /home/zmc/Desktop/master_arbeit/build/MarkerTrailer && $(CMAKE_COMMAND) -P CMakeFiles/_catkin_empty_exported_target.dir/cmake_clean.cmake
 .PHONY : MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/clean
 
 MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/depend:
 	cd /home/zmc/Desktop/master_arbeit/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zmc/Desktop/master_arbeit/src /home/zmc/Desktop/master_arbeit/src/MarkerTrailer /home/zmc/Desktop/master_arbeit/build /home/zmc/Desktop/master_arbeit/build/MarkerTrailer /home/zmc/Desktop/master_arbeit/build/MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
 .PHONY : MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/depend
 

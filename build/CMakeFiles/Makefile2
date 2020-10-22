@@ -429,14 +429,24 @@ MarkerTrailer/preinstall:
 MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/all:
 	$(MAKE) -f MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/build.make MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/depend
 	$(MAKE) -f MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/build.make MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/build
+<<<<<<< HEAD
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sibohao/Desktop/master_arbeit/build/CMakeFiles --progress-num= "Built target _catkin_empty_exported_target"
+=======
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zmc/Desktop/master_arbeit/build/CMakeFiles --progress-num= "Built target _catkin_empty_exported_target"
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
 .PHONY : MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/all
 
 # Build rule for subdir invocation for target.
 MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/rule: cmake_check_build_system
+<<<<<<< HEAD
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sibohao/Desktop/master_arbeit/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sibohao/Desktop/master_arbeit/build/CMakeFiles 0
+=======
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/zmc/Desktop/master_arbeit/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/zmc/Desktop/master_arbeit/build/CMakeFiles 0
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
 .PHONY : MarkerTrailer/CMakeFiles/_catkin_empty_exported_target.dir/rule
 
 # Convenience name for target.

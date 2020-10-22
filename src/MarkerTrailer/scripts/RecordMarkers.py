@@ -45,13 +45,15 @@ class Node():
 
         pic_ori = cv_image
 
+<<<<<<< HEAD:src/MarkerTrailer/scripts/PublishAllMarkers.py
+=======
         pic_gray = cv2.cvtColor(pic_ori, cv2.COLOR_BGR2GRAY)
 
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e:src/MarkerTrailer/scripts/RecordMarkers.py
         aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_100)  # Use 5x5 dictionary to find markers
         parameters = aruco.DetectorParameters_create()  # Marker detection parameters
 
         # lists of ids and the corners beloning to each id
-
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
 
         # First initialize a PoseArry message
@@ -69,8 +71,16 @@ class Node():
             tvec=res[1]
 #            markerPoints=res[2]
 
+<<<<<<< HEAD:src/MarkerTrailer/scripts/PublishAllMarkers.py
+            # Draw squares around the markers
+            aruco.drawDetectedMarkers(pic_gray, corners)
+
+            # Iterate in markers
+            for i in range(0, ids.size):
+=======
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
             for i in range(0, ids.size):  # Iterate in markers
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e:src/MarkerTrailer/scripts/RecordMarkers.py
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i][0], tvec[i][0], 0.1)
 
@@ -85,7 +95,11 @@ class Node():
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
+<<<<<<< HEAD:src/MarkerTrailer/scripts/PublishAllMarkers.py
+                #initialize and write information
+=======
                 #write information
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e:src/MarkerTrailer/scripts/RecordMarkers.py
                 single_pose = Pose ()
 
                 single_pose.position.x = float(tvec[i][0][0])
@@ -100,11 +114,14 @@ class Node():
                 print("rvec",rvec[i][0])
                 print("tvec",tvec[i][0])
                 pose_information.poses.append(single_pose)
+<<<<<<< HEAD:src/MarkerTrailer/scripts/PublishAllMarkers.py
+=======
 
                 Marker_Dict[ids[i][0]] = single_pose
 
 
 #        print(Marker_Dict)
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e:src/MarkerTrailer/scripts/RecordMarkers.py
 
         #publish to the topic
         pub1 = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
@@ -112,6 +129,12 @@ class Node():
         pub1.publish(pose_information)
         rate.sleep()
 
+<<<<<<< HEAD:src/MarkerTrailer/scripts/PublishAllMarkers.py
+        #cv2.imshow("Gray Image Window", pic_gray)
+        #cv2.waitKey(1)
+
+=======
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e:src/MarkerTrailer/scripts/RecordMarkers.py
 if __name__ == '__main__':
     rospy.init_node("Get_Pic", anonymous=True)
     my_node = Node()

@@ -130,11 +130,19 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+<<<<<<< HEAD
+  include("/home/sibohao/Desktop/master_arbeit/build/gtest/cmake_install.cmake")
+  include("/home/sibohao/Desktop/master_arbeit/build/MarkerTrailer/cmake_install.cmake")
+  include("/home/sibohao/Desktop/master_arbeit/build/preparing/cmake_install.cmake")
+  include("/home/sibohao/Desktop/master_arbeit/build/pic_reader/cmake_install.cmake")
+  include("/home/sibohao/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver/cmake_install.cmake")
+=======
   include("/home/zmc/Desktop/master_arbeit/build/gtest/cmake_install.cmake")
   include("/home/zmc/Desktop/master_arbeit/build/MarkerTrailer/cmake_install.cmake")
   include("/home/zmc/Desktop/master_arbeit/build/preparing/cmake_install.cmake")
   include("/home/zmc/Desktop/master_arbeit/build/pic_reader/cmake_install.cmake")
   include("/home/zmc/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver/cmake_install.cmake")
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
 
 endif()
 

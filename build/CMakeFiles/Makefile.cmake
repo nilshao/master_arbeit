@@ -12,8 +12,11 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.10.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.10.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.10.2/CMakeSystem.cmake"
+<<<<<<< HEAD
+=======
   "CMakeFiles/feature_tests.c"
   "CMakeFiles/feature_tests.cxx"
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
   "MarkerTrailer/catkin_generated/package.cmake"
   "catkin/catkin_generated/version/package.cmake"
   "catkin_generated/installspace/_setup_util.py"
@@ -23,6 +26,25 @@ set(CMAKE_MAKEFILE_DEPENDS
   "preparing/catkin_generated/ordered_paths.cmake"
   "preparing/catkin_generated/package.cmake"
   "preparing/catkin_generated/setup_py_interrogation.cmake"
+<<<<<<< HEAD
+  "/home/sibohao/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/CMakeLists.txt"
+  "/home/sibohao/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/cmake/FindModuleHelpers.cmake"
+  "/home/sibohao/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/cmake/Findk4a.cmake"
+  "/home/sibohao/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/cmake/Findk4abt.cmake"
+  "/home/sibohao/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/cmake/Installk4a.cmake"
+  "/home/sibohao/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/package.xml"
+  "/home/sibohao/Desktop/master_arbeit/src/CMakeLists.txt"
+  "/home/sibohao/Desktop/master_arbeit/src/MarkerTrailer/CMakeLists.txt"
+  "/home/sibohao/Desktop/master_arbeit/src/MarkerTrailer/package.xml"
+  "/home/sibohao/Desktop/master_arbeit/src/pic_reader/CMakeLists.txt"
+  "/home/sibohao/Desktop/master_arbeit/src/pic_reader/package.xml"
+  "/home/sibohao/Desktop/master_arbeit/src/pic_reader/scripts/Get_Pic.py"
+  "/home/sibohao/Desktop/master_arbeit/src/pic_reader/scripts/listener.py"
+  "/home/sibohao/Desktop/master_arbeit/src/preparing/CMakeLists.txt"
+  "/home/sibohao/Desktop/master_arbeit/src/preparing/package.xml"
+  "/home/sibohao/Desktop/master_arbeit/src/preparing/scripts/GetImage.py"
+  "/home/sibohao/Desktop/master_arbeit/src/preparing/setup.py"
+=======
   "/home/zmc/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/CMakeLists.txt"
   "/home/zmc/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/cmake/FindModuleHelpers.cmake"
   "/home/zmc/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver/cmake/Findk4a.cmake"
@@ -40,6 +62,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/zmc/Desktop/master_arbeit/src/preparing/package.xml"
   "/home/zmc/Desktop/master_arbeit/src/preparing/scripts/GetImage.py"
   "/home/zmc/Desktop/master_arbeit/src/preparing/setup.py"
+>>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
   "/opt/ros/melodic/share/actionlib/cmake/actionlib-msg-extras.cmake"
   "/opt/ros/melodic/share/actionlib/cmake/actionlibConfig-version.cmake"
   "/opt/ros/melodic/share/actionlib/cmake/actionlibConfig.cmake"
