@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -130,19 +130,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-<<<<<<< HEAD
-  include("/home/sibohao/Desktop/master_arbeit/build/gtest/cmake_install.cmake")
-  include("/home/sibohao/Desktop/master_arbeit/build/MarkerTrailer/cmake_install.cmake")
-  include("/home/sibohao/Desktop/master_arbeit/build/preparing/cmake_install.cmake")
-  include("/home/sibohao/Desktop/master_arbeit/build/pic_reader/cmake_install.cmake")
-  include("/home/sibohao/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver/cmake_install.cmake")
-=======
   include("/home/zmc/Desktop/master_arbeit/build/gtest/cmake_install.cmake")
   include("/home/zmc/Desktop/master_arbeit/build/MarkerTrailer/cmake_install.cmake")
   include("/home/zmc/Desktop/master_arbeit/build/preparing/cmake_install.cmake")
   include("/home/zmc/Desktop/master_arbeit/build/pic_reader/cmake_install.cmake")
   include("/home/zmc/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver/cmake_install.cmake")
->>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
 
 endif()
 

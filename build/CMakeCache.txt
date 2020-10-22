@@ -14,6 +14,8 @@
 # EXTERNAL cache entries
 ########################
 
+:UNINITIALIZED=======
+
 //Builds the googlemock subproject
 BUILD_GMOCK:BOOL=ON
 
@@ -47,7 +49,7 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
-CMAKE_BUILD_TYPE:STRING=
+CMAKE_BUILD_TYPE:STRING=Debug
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -243,17 +245,10 @@ LSB_FOUND:BOOL=TRUE
 LSB_RELEASE_EXECUTABLE:FILEPATH=/usr/bin/lsb_release
 
 //Value Computed by CMake
-<<<<<<< HEAD
-MarkerTrailer_BINARY_DIR:STATIC=/home/sibohao/Desktop/master_arbeit/build/MarkerTrailer
-
-//Value Computed by CMake
-MarkerTrailer_SOURCE_DIR:STATIC=/home/sibohao/Desktop/master_arbeit/src/MarkerTrailer
-=======
 MarkerTrailer_BINARY_DIR:STATIC=/home/zmc/Desktop/master_arbeit/build/MarkerTrailer
 
 //Value Computed by CMake
 MarkerTrailer_SOURCE_DIR:STATIC=/home/zmc/Desktop/master_arbeit/src/MarkerTrailer
->>>>>>> dd90c5f2991f6a92ee7d6222f11eecb6dd07d55e
 
 //Path to a program.
 NOSETESTS:FILEPATH=/usr/bin/nosetests-2.7
