@@ -38,11 +38,9 @@ kf.H = np.array([[1.,0.,0.,0.,0.,0.],
                 [0.,1.,0.,0.,0.,0.],
                 [0.,0.,1.,0.,0.,0.]])
 #kf covariance matrix: P already contains np.eye, multiplies uncertainty
-kf.P *= 10
+kf.P *= 0.0001
 #measurement noice:
-kf.R = np.array([[5.,5.,5.],
-                [5.,5.,5.],
-                [5.,5.,5.]])
+kf.R = 0.0001                   #should think and tune how much error might have 
 
 #process noise         https://filterpy.readthedocs.io/en/latest/common/common.html
 kf.Q = Q_discrete_white_noise(dim = 2, dt=0.03, var=1., block_size=3)
