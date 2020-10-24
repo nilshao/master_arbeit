@@ -7,6 +7,8 @@ import matplotlib as mpl
 from scipy.spatial.transform import Rotation
 from camera_handler import CameraHandler
 
+#ee: end efector
+
 # camera 1
 CAMERA_INTRINSICS_MAT = np.array(
     [[610.331, 0, 312.435], [0, 608.768, 246.99], [0, 0, 1]], dtype=np.float32)
