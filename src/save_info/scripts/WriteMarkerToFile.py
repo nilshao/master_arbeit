@@ -6,6 +6,8 @@ import cv2
 import cv2.aruco as aruco
 import tf
 import math
+import thread
+import time
 
 from cv_bridge import CvBridge, CvBridgeError
 
@@ -34,15 +36,36 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
 class Node():
 
     def __init__(self):
+        
         self.bridge = CvBridge()
         sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
 
         while not rospy.is_shutdown():
             rospy.spin()
 
+    def RecordAllPosition(self, time_seq, tvec_single, rvec_single):
+
+        KeepRecord = open("Try1.txt", "a")
+        KeepRecord.write("%i " % (time_seq))
+        KeepRecord.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1],tvec_single[2]))
+        KeepRecord.write("\n")
+        KeepRecord.close()
+
+    def RecordWhenInput(self, time_seq, tvec_single, rvec_single):
+
+        RecordSingle = open("Try2.txt", "a")
+        print("type something so that i will record")
+        cmd_to_record = raw_input()
+        # can do sth with cmd_to_record
+
+        RecordSingle.write("%i " % (time_seq))
+        RecordSingle.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1],tvec_single[2]))
+        RecordSingle.write("\n")
+        RecordSingle.close()
+
     def image_callback(self,img_msg):
         # log some info about the image topic
-        rospy.loginfo(img_msg.header)
+#        rospy.loginfo(img_msg.header)
 
         cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
 
@@ -61,9 +84,6 @@ class Node():
         pose_information = PoseArray ()
         pose_information.header.frame_id = "rgb_camera_link"
         pose_information.header.stamp = rospy.Time.now()
-
-        txt_record = open("Try1.txt", "a")
-        
 
         if np.all(ids is not None):  # If there are markers found by detector
             num_of_markers = ids.size
@@ -101,17 +121,15 @@ class Node():
                 single_pose.orientation.w = quaternion[3]
 
                 pose_information.poses.append(single_pose)
-                print("tvec is: ",tvec[i][0])
+#                print("tvec is: ",tvec[i][0])
 
-                while not is_shutdown():
-                    print "print something to record position of Marker"
-                    cmd_to_record = raw_input()
-                    print "i hear " + cmd_to_record 
-                    txt_record.write("%i " % (img_msg.header.seq))
-                    txt_record.write("%5.8f %5.8f %5.8f" % (tvec[i][0][0], tvec[i][0][1],tvec[i][0][2]))
-                    txt_record.write("\n")
-
-        txt_record.close()
+                #thread.start_new_thread ( function, args[, kwargs] )
+                # Create two threads as follows
+                try:
+                    thread.start_new_thread( self.RecordAllPosition, (img_msg.header.seq, rvec[i][0],tvec[i][0]) )
+                    thread.start_new_thread( self.RecordWhenInput, (img_msg.header.seq, rvec[i][0],tvec[i][0]) )
+                except:
+                    print "Error: unable to start thread"
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
