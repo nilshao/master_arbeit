@@ -1,4 +1,4 @@
-prefix=/home/sibohao/Desktop/master_arbeit/install
+prefix=/home/zmc/Desktop/master_arbeit/install
 
 Name: azure_kinect_ros_driver
 Description: Description of azure_kinect_ros_driver

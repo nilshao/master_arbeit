@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sibohao/Desktop/master_arbeit/src
+CMAKE_SOURCE_DIR = /home/zmc/Desktop/master_arbeit/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sibohao/Desktop/master_arbeit/build
+CMAKE_BINARY_DIR = /home/zmc/Desktop/master_arbeit/build
 
 # Utility rule file for bond_generate_messages_nodejs.
 
@@ -63,10 +63,10 @@ Azure_Kinect_ROS_Driver/CMakeFiles/bond_generate_messages_nodejs.dir/build: bond
 .PHONY : Azure_Kinect_ROS_Driver/CMakeFiles/bond_generate_messages_nodejs.dir/build
 
 Azure_Kinect_ROS_Driver/CMakeFiles/bond_generate_messages_nodejs.dir/clean:
-	cd /home/sibohao/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver && $(CMAKE_COMMAND) -P CMakeFiles/bond_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/zmc/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver && $(CMAKE_COMMAND) -P CMakeFiles/bond_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : Azure_Kinect_ROS_Driver/CMakeFiles/bond_generate_messages_nodejs.dir/clean
 
 Azure_Kinect_ROS_Driver/CMakeFiles/bond_generate_messages_nodejs.dir/depend:
-	cd /home/sibohao/Desktop/master_arbeit/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sibohao/Desktop/master_arbeit/src /home/sibohao/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver /home/sibohao/Desktop/master_arbeit/build /home/sibohao/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver /home/sibohao/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver/CMakeFiles/bond_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/zmc/Desktop/master_arbeit/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zmc/Desktop/master_arbeit/src /home/zmc/Desktop/master_arbeit/src/Azure_Kinect_ROS_Driver /home/zmc/Desktop/master_arbeit/build /home/zmc/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver /home/zmc/Desktop/master_arbeit/build/Azure_Kinect_ROS_Driver/CMakeFiles/bond_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Azure_Kinect_ROS_Driver/CMakeFiles/bond_generate_messages_nodejs.dir/depend
 

@@ -1,2 +1,2 @@
 Azure_Kinect_ROS_Driver:MarkerTrailer:pic_reader:preparing:save_info
--DCATKIN_DEVEL_PREFIX=/home/sibohao/Desktop/master_arbeit/devel -DCMAKE_INSTALL_PREFIX=/home/sibohao/Desktop/master_arbeit/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/zmc/Desktop/master_arbeit/devel -DCMAKE_INSTALL_PREFIX=/home/zmc/Desktop/master_arbeit/install -G Unix Makefiles

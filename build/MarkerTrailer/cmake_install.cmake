@@ -1,8 +1,8 @@
-# Install script for directory: /home/sibohao/Desktop/master_arbeit/src/MarkerTrailer
+# Install script for directory: /home/zmc/Desktop/master_arbeit/src/MarkerTrailer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/sibohao/Desktop/master_arbeit/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zmc/Desktop/master_arbeit/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/sibohao/Desktop/master_arbeit/build/MarkerTrailer/catkin_generated/installspace/MarkerTrailer.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zmc/Desktop/master_arbeit/build/MarkerTrailer/catkin_generated/installspace/MarkerTrailer.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/MarkerTrailer/cmake" TYPE FILE FILES
-    "/home/sibohao/Desktop/master_arbeit/build/MarkerTrailer/catkin_generated/installspace/MarkerTrailerConfig.cmake"
-    "/home/sibohao/Desktop/master_arbeit/build/MarkerTrailer/catkin_generated/installspace/MarkerTrailerConfig-version.cmake"
+    "/home/zmc/Desktop/master_arbeit/build/MarkerTrailer/catkin_generated/installspace/MarkerTrailerConfig.cmake"
+    "/home/zmc/Desktop/master_arbeit/build/MarkerTrailer/catkin_generated/installspace/MarkerTrailerConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/MarkerTrailer" TYPE FILE FILES "/home/sibohao/Desktop/master_arbeit/src/MarkerTrailer/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/MarkerTrailer" TYPE FILE FILES "/home/zmc/Desktop/master_arbeit/src/MarkerTrailer/package.xml")
 endif()
 

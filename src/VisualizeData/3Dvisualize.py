@@ -6,7 +6,7 @@ x = []
 y = []
 z = []
 
-data = open("simple01.txt")
+data = open("Try1.txt")
 
 fig = plt.figure()
 ax = Axes3D(fig)
@@ -20,7 +20,7 @@ for line in data.readlines():
         y.append(floatLine[2])
         z.append(floatLine[3])
     
-#ax.plot(x,y,z)
+ax.plot(x,y,z)
 ax.scatter(x,y,z)
 ax.set_xlabel('x')
 ax.set_ylabel('y')

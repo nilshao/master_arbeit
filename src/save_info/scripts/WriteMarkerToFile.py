@@ -39,7 +39,7 @@ class Node():
         
         self.bridge = CvBridge()
         sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
-
+    
         while not rospy.is_shutdown():
             rospy.spin()
 
@@ -47,7 +47,7 @@ class Node():
 
         KeepRecord = open("Try1.txt", "a")
         KeepRecord.write("%i " % (time_seq))
-        KeepRecord.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1],tvec_single[2]))
+        KeepRecord.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2]))
         KeepRecord.write("\n")
         KeepRecord.close()
 
@@ -59,7 +59,7 @@ class Node():
         # can do sth with cmd_to_record
 
         RecordSingle.write("%i " % (time_seq))
-        RecordSingle.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1],tvec_single[2]))
+        RecordSingle.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2]))
         RecordSingle.write("\n")
         RecordSingle.close()
 

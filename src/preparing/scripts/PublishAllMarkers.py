@@ -95,6 +95,9 @@ class Node():
 
                 pose_information.poses.append(single_pose)
 
+        cv2.imshow("Gray Image Window", pic_gray)
+        cv2.waitKey(1)
+        
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
         rate = rospy.Rate(30) # Hz

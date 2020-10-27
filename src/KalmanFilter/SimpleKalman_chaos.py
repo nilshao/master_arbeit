@@ -21,7 +21,7 @@ if __name__ == '__main__':
     kf = KalmanFilter (dim_x = 6, dim_z = 3)
 
     # read the file
-    data = open("simple01.txt")
+    data = open("Try1.txt")
 
     #initialize plotting
     fig = plt.figure()
@@ -50,8 +50,10 @@ if __name__ == '__main__':
 
         # split the information by space
         curline = line.strip().split(" ")
+        floatLine = np.array([float(x) for x in curline])
+        
         # and save the information in a map
-        floatLine = map(float,curline)
+       # floatLine = map(float,curline)
         
         #if there is coordinate in this line
         if len(floatLine)>1:
@@ -59,6 +61,7 @@ if __name__ == '__main__':
             #kf initialization
             if len(x_kf) == 0:
                 x_kf.append(floatLine[1])
+                
                 y_kf.append(floatLine[2])
                 z_kf.append(floatLine[3])
                 
@@ -67,31 +70,36 @@ if __name__ == '__main__':
 
             else:
                 #zt is the observation vector
-                zt = np.array([[floatLine[1]],[floatLine[2]],[floatLine[3]]])
+                zt = np.array([floatLine[1],floatLine[2],floatLine[3]])
+                
                 kf.predict()
                 kf.update(zt)
 
-                x_kf.append(kf.x[0])
-                y_kf.append(kf.x[1])
-                z_kf.append(kf.x[2])
+                x_kf.append(kf.x[0][0])
+                print(kf.x[0])
+                y_kf.append(kf.x[1][0])
+                z_kf.append(kf.x[2][0])
 
             x_ori.append(floatLine[1])
             y_ori.append(floatLine[2])
-            z_ori.append(floatLine[3])  
-        
+            z_ori.append(floatLine[3]) 
     #plot is a line, scatter are discrete points
     ax.plot(x_ori,y_ori,z_ori,c = 'green')
     ax.scatter(x_ori,y_ori,z_ori,c = 'green')
 
-    ax.plot(x_kf,y_kf,z_kf,c = 'red')
-    ax.scatter(x_kf,y_kf,z_kf,c = 'red')
-
-    #add lable
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
-
-
+    
+    
+    ax.plot(x_kf,y_kf,z_kf,c = 'red')
+    ax.scatter(x_kf,y_kf,z_kf,c = 'red')
+    
     plt.show()
     data.close()
+
+    #add lable
+    
+
+    
 
