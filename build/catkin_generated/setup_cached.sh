@@ -8,4 +8,3 @@
 
 # modified environment variables
 export PWD='/home/zmc/Desktop/master_arbeit/build'
-export ROS_PACKAGE_PATH='/home/zmc/Desktop/master_arbeit/src:/opt/ros/melodic/share'

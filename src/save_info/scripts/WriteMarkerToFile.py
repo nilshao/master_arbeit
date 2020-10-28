@@ -45,9 +45,9 @@ class Node():
 
     def RecordAllPosition(self, time_seq, tvec_single, rvec_single):
 
-        KeepRecord = open("Try1.txt", "a")
+        KeepRecord = open("MarkerToCamera.txt", "a")
         KeepRecord.write("%i " % (time_seq))
-        KeepRecord.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2]))
+        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2], rvec_single[0], rvec_single[1], rvec_single[2]))
         KeepRecord.write("\n")
         KeepRecord.close()
 

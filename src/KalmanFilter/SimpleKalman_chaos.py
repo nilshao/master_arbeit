@@ -76,7 +76,6 @@ if __name__ == '__main__':
                 kf.update(zt)
 
                 x_kf.append(kf.x[0][0])
-                print(kf.x[0])
                 y_kf.append(kf.x[1][0])
                 z_kf.append(kf.x[2][0])
 
@@ -86,14 +85,13 @@ if __name__ == '__main__':
     #plot is a line, scatter are discrete points
     ax.plot(x_ori,y_ori,z_ori,c = 'green')
     ax.scatter(x_ori,y_ori,z_ori,c = 'green')
+    
+    ax.plot(x_kf,y_kf,z_kf,c = 'red')
+    ax.scatter(x_kf,y_kf,z_kf,c = 'red')
 
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
-    
-    
-    ax.plot(x_kf,y_kf,z_kf,c = 'red')
-    ax.scatter(x_kf,y_kf,z_kf,c = 'red')
     
     plt.show()
     data.close()
