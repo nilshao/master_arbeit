@@ -17,7 +17,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/zmc/libfranka/include"
+  "/usr/local/include"
   "/home/zmc/Desktop/master_arbeit/devel/include"
   "/home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include"
   "/opt/ros/melodic/include"

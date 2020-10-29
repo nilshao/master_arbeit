@@ -33,15 +33,18 @@ matrix_coefficients = np.array([np.array([606.6464233398438,    0.0,            
                                 np.array([0.0,                  0.0,                    1.0])])
 distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582,     0.00045736812171526253,     -0.00019684531434904784,
                                     1.499117374420166,      0.39795395731925964,    -2.4385111331939697,        1.4303737878799438])
+marker_pose = PoseStamped()
+initial_pose_found = False
 
 class Node():
 
     def __init__(self):
 
         self.bridge = CvBridge()
+
         sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
-        sub_pose = rospy.Subscriber("franka_state_controller/franka_states",
-                                     FrankaState, self.franka_state_callback)
+        sub_pose = rospy.Subscriber("franka_state_controller/franka_states",FrankaState, self.franka_state_callback)
+
         while not rospy.is_shutdown():
             rospy.spin()
 
@@ -64,7 +67,9 @@ class Node():
         RecordSingle.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2]))
         RecordSingle.write("\n")
         RecordSingle.close()
+
     def franka_state_callback(self,msg):
+
         initial_quaternion = \
             tf.transformations.quaternion_from_matrix(
                 np.transpose(np.reshape(msg.O_T_EE,
@@ -78,8 +83,9 @@ class Node():
         marker_pose.pose.position.y = msg.O_T_EE[13]
         marker_pose.pose.position.z = msg.O_T_EE[14]
         global initial_pose_found
-        print("s")
+        print(msg.O_T_EE)
         initial_pose_found = True
+
 
     def image_callback(self,img_msg):
         # log some info about the image topic

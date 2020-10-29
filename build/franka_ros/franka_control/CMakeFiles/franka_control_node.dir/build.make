@@ -93,7 +93,7 @@ franka_control_node_EXTERNAL_OBJECTS =
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /opt/ros/melodic/lib/libcontroller_manager.so
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so
-/home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /home/zmc/libfranka/build/libfranka.so.0.8.0
+/home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /usr/local/lib/libfranka.so.0.8.0
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /opt/ros/melodic/lib/libcombined_robot_hw.so
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /opt/ros/melodic/lib/liburdf.so
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so
@@ -134,7 +134,7 @@ franka_control_node_EXTERNAL_OBJECTS =
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /usr/lib/x86_64-linux-gnu/libpthread.so
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /home/zmc/libfranka/build/libfranka.so.0.8.0
+/home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: /usr/local/lib/libfranka.so.0.8.0
 /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node: franka_ros/franka_control/CMakeFiles/franka_control_node.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/zmc/Desktop/master_arbeit/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/zmc/Desktop/master_arbeit/devel/lib/franka_control/franka_control_node"
 	cd /home/zmc/Desktop/master_arbeit/build/franka_ros/franka_control && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/franka_control_node.dir/link.txt --verbose=$(VERBOSE)

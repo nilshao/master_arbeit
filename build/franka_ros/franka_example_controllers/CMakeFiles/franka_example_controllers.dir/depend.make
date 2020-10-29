@@ -7,14 +7,6 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/src/cartesian_impedance_example_controller.cpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/command_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/control_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/lowpass_filter.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/model.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -326,14 +318,19 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/command_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/control_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/lowpass_filter.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/model.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/robot.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/cartesian_pose_example_controller.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/src/cartesian_pose_example_controller.cpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -410,14 +407,14 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /opt/ros/melodic/include/rosconsole/macros_generated.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_pose_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/cartesian_velocity_example_controller.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/src/cartesian_velocity_example_controller.cpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -496,6 +493,9 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /opt/ros/melodic/include/rosconsole/macros_generated.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/cartesian_velocity_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/devel/include/franka_example_controllers/dual_arm_compliance_paramConfig.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/dual_arm_cartesian_impedance_example_controller.h
@@ -504,14 +504,6 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/trigger_rate.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/command_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/control_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/lowpass_filter.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/model.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -876,14 +868,19 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/command_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/control_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/lowpass_filter.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/model.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/robot.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/dual_arm_cartesian_impedance_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/elbow_example_controller.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/src/elbow_example_controller.cpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -960,20 +957,15 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /opt/ros/melodic/include/rosconsole/macros_generated.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/elbow_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/devel/include/franka_example_controllers/desired_mass_paramConfig.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/force_example_controller.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/src/force_example_controller.cpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/libfranka/include/franka/command_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/libfranka/include/franka/control_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/libfranka/include/franka/lowpass_filter.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/libfranka/include/franka/model.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -1208,6 +1200,14 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/local/include/franka/command_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/local/include/franka/control_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/local/include/franka/lowpass_filter.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/local/include/franka/model.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/local/include/franka/robot.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/force_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/devel/include/franka_example_controllers/JointTorqueComparison.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/joint_impedance_example_controller.h
@@ -1216,14 +1216,6 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/trigger_rate.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/command_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/control_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/lowpass_filter.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/model.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -1304,6 +1296,14 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /opt/ros/melodic/include/rosconsole/macros_generated.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /usr/local/include/franka/command_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /usr/local/include/franka/control_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /usr/local/include/franka/lowpass_filter.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /usr/local/include/franka/model.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /usr/local/include/franka/robot.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_impedance_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_position_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/joint_position_example_controller.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_position_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/src/joint_position_example_controller.cpp
@@ -1389,9 +1389,6 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/joint_velocity_example_controller.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/src/joint_velocity_example_controller.cpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -1470,20 +1467,15 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /opt/ros/melodic/include/rosconsole/macros_generated.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/joint_velocity_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include/franka_example_controllers/model_example_controller.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/src/model_example_controller.cpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_model_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/trigger_rate.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/libfranka/include/franka/command_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/libfranka/include/franka/control_types.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/libfranka/include/franka/lowpass_filter.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/libfranka/include/franka/model.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot.h
-franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -1560,4 +1552,12 @@ franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /opt/ros/melodic/include/rosconsole/macros_generated.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /usr/local/include/franka/command_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /usr/local/include/franka/control_types.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /usr/local/include/franka/lowpass_filter.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /usr/local/include/franka/model.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /usr/local/include/franka/robot.h
+franka_ros/franka_example_controllers/CMakeFiles/franka_example_controllers.dir/src/model_example_controller.cpp.o: /usr/local/include/franka/robot_state.h
 

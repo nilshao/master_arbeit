@@ -8,9 +8,6 @@ franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_stat
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/trigger_rate.h
-franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader.hpp
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /opt/ros/melodic/include/class_loader/class_loader_core.hpp
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -130,4 +127,7 @@ franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_stat
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /opt/ros/melodic/include/tf2_ros/buffer_interface.h
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_state_controller.cpp.o: /usr/local/include/franka/robot_state.h
 

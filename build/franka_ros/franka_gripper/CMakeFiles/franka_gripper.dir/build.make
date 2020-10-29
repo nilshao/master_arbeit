@@ -90,7 +90,7 @@ franka_gripper_EXTERNAL_OBJECTS =
 
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_gripper.so: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/src/franka_gripper.cpp.o
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_gripper.so: franka_ros/franka_gripper/CMakeFiles/franka_gripper.dir/build.make
-/home/zmc/Desktop/master_arbeit/devel/lib/libfranka_gripper.so: /home/zmc/libfranka/build/libfranka.so.0.8.0
+/home/zmc/Desktop/master_arbeit/devel/lib/libfranka_gripper.so: /usr/local/lib/libfranka.so.0.8.0
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_gripper.so: /opt/ros/melodic/lib/libactionlib.so
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_gripper.so: /opt/ros/melodic/lib/libroscpp.so
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_gripper.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so

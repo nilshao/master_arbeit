@@ -9,9 +9,6 @@ franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_stat
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/trigger_rate.h
- /home/zmc/libfranka/include/franka/duration.h
- /home/zmc/libfranka/include/franka/errors.h
- /home/zmc/libfranka/include/franka/robot_state.h
  /opt/ros/melodic/include/class_loader/class_loader.hpp
  /opt/ros/melodic/include/class_loader/class_loader_core.hpp
  /opt/ros/melodic/include/class_loader/exceptions.hpp
@@ -131,3 +128,6 @@ franka_ros/franka_control/CMakeFiles/franka_state_controller.dir/src/franka_stat
  /opt/ros/melodic/include/tf2_ros/buffer_interface.h
  /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
  /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+ /usr/local/include/franka/duration.h
+ /usr/local/include/franka/errors.h
+ /usr/local/include/franka/robot_state.h

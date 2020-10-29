@@ -6,5 +6,5 @@ CXX_FLAGS = -O3 -DNDEBUG -fPIC   -std=gnu++14
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"franka_example_controllers\" -Dfranka_example_controllers_EXPORTS
 
-CXX_INCLUDES = -isystem /home/zmc/Desktop/master_arbeit/devel/include -isystem /home/zmc/libfranka/include -isystem /usr/include/eigen3 -isystem /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include -isystem /opt/ros/melodic/include -isystem /opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /opt/ros/melodic/share/orocos_kdl/cmake/../../../include -I/home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include 
+CXX_INCLUDES = -isystem /home/zmc/Desktop/master_arbeit/devel/include -isystem /usr/local/include -isystem /usr/include/eigen3 -isystem /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include -isystem /opt/ros/melodic/include -isystem /opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /opt/ros/melodic/share/orocos_kdl/cmake/../../../include -I/home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers/include 
 

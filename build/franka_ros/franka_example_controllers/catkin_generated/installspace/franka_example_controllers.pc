@@ -3,6 +3,6 @@ prefix=/home/zmc/Desktop/master_arbeit/install
 Name: franka_example_controllers
 Description: Description of franka_example_controllers
 Version: 0.7.0
-Cflags: -I${prefix}/include -I/home/zmc/libfranka/include
-Libs: -L${prefix}/lib -lfranka_example_controllers /home/zmc/libfranka/build/libfranka.so.0.8.0
+Cflags: -I${prefix}/include -I/usr/local/include
+Libs: -L${prefix}/lib -lfranka_example_controllers /usr/local/lib/libfranka.so.0.8.0
 Requires: controller_interface dynamic_reconfigure eigen_conversions franka_hw geometry_msgs hardware_interface tf tf_conversions message_runtime pluginlib realtime_tools roscpp

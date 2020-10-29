@@ -32,14 +32,6 @@ franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/Desktop/master_arbeit/devel/include/franka_gripper/StopResult.h
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_gripper/include/franka_gripper/franka_gripper.h
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_gripper/src/franka_gripper_node.cpp
-franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/libfranka/include/franka/control_types.h
-franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/libfranka/include/franka/duration.h
-franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/libfranka/include/franka/errors.h
-franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/libfranka/include/franka/exception.h
-franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/libfranka/include/franka/gripper.h
-franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/libfranka/include/franka/gripper_state.h
-franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/libfranka/include/franka/log.h
-franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /home/zmc/libfranka/include/franka/robot_state.h
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /opt/ros/melodic/include/actionlib/action_definition.h
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /opt/ros/melodic/include/actionlib/decl.h
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /opt/ros/melodic/include/actionlib/destruction_guard.h
@@ -127,4 +119,12 @@ franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /opt/ros/melodic/include/std_msgs/Header.h
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /usr/local/include/franka/control_types.h
+franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /usr/local/include/franka/duration.h
+franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /usr/local/include/franka/errors.h
+franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /usr/local/include/franka/exception.h
+franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /usr/local/include/franka/gripper.h
+franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /usr/local/include/franka/gripper_state.h
+franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /usr/local/include/franka/log.h
+franka_ros/franka_gripper/CMakeFiles/franka_gripper_node.dir/src/franka_gripper_node.cpp.o: /usr/local/include/franka/robot_state.h
 

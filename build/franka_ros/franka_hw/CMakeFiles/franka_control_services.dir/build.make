@@ -90,7 +90,7 @@ franka_control_services_EXTERNAL_OBJECTS =
 
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so: franka_ros/franka_hw/CMakeFiles/franka_control_services.dir/src/services.cpp.o
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so: franka_ros/franka_hw/CMakeFiles/franka_control_services.dir/build.make
-/home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so: /home/zmc/libfranka/build/libfranka.so.0.8.0
+/home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so: /usr/local/lib/libfranka.so.0.8.0
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so: /opt/ros/melodic/lib/libactionlib.so
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so: /opt/ros/melodic/lib/libcombined_robot_hw.so
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so: /opt/ros/melodic/lib/liburdf.so

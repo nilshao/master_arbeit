@@ -256,7 +256,7 @@ franka_hw_EXTERNAL_OBJECTS =
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so: /usr/lib/x86_64-linux-gnu/libpthread.so
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so: /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_control_services.so
-/home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so: /home/zmc/libfranka/build/libfranka.so.0.8.0
+/home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so: /usr/local/lib/libfranka.so.0.8.0
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so: /opt/ros/melodic/lib/libactionlib.so
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so: /opt/ros/melodic/lib/libcombined_robot_hw.so
 /home/zmc/Desktop/master_arbeit/devel/lib/libfranka_hw.so: /opt/ros/melodic/lib/liburdf.so

@@ -18,7 +18,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/zmc/Desktop/master_arbeit/devel/include"
-  "/home/zmc/libfranka/include"
+  "/usr/local/include"
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/home/zmc/Desktop/master_arbeit/src/franka_ros/franka_gripper/include"

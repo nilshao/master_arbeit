@@ -42,17 +42,6 @@ franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combinable_hw.cpp.o
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/resource_helpers.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/services.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/src/franka_combinable_hw.cpp
- /home/zmc/libfranka/include/franka/command_types.h
- /home/zmc/libfranka/include/franka/control_types.h
- /home/zmc/libfranka/include/franka/duration.h
- /home/zmc/libfranka/include/franka/errors.h
- /home/zmc/libfranka/include/franka/exception.h
- /home/zmc/libfranka/include/franka/log.h
- /home/zmc/libfranka/include/franka/lowpass_filter.h
- /home/zmc/libfranka/include/franka/model.h
- /home/zmc/libfranka/include/franka/rate_limiting.h
- /home/zmc/libfranka/include/franka/robot.h
- /home/zmc/libfranka/include/franka/robot_state.h
  /opt/ros/melodic/include/actionlib/action_definition.h
  /opt/ros/melodic/include/actionlib/decl.h
  /opt/ros/melodic/include/actionlib/destruction_guard.h
@@ -157,6 +146,17 @@ franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combinable_hw.cpp.o
  /opt/ros/melodic/include/urdf/visibility_control.hpp
  /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
  /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+ /usr/local/include/franka/command_types.h
+ /usr/local/include/franka/control_types.h
+ /usr/local/include/franka/duration.h
+ /usr/local/include/franka/errors.h
+ /usr/local/include/franka/exception.h
+ /usr/local/include/franka/log.h
+ /usr/local/include/franka/lowpass_filter.h
+ /usr/local/include/franka/model.h
+ /usr/local/include/franka/rate_limiting.h
+ /usr/local/include/franka/robot.h
+ /usr/local/include/franka/robot_state.h
 franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combined_hw.cpp.o
  /home/zmc/Desktop/master_arbeit/devel/include/franka_msgs/ErrorRecoveryAction.h
  /home/zmc/Desktop/master_arbeit/devel/include/franka_msgs/ErrorRecoveryActionFeedback.h
@@ -196,17 +196,6 @@ franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combined_hw.cpp.o
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/resource_helpers.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/services.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/src/franka_combined_hw.cpp
- /home/zmc/libfranka/include/franka/command_types.h
- /home/zmc/libfranka/include/franka/control_types.h
- /home/zmc/libfranka/include/franka/duration.h
- /home/zmc/libfranka/include/franka/errors.h
- /home/zmc/libfranka/include/franka/exception.h
- /home/zmc/libfranka/include/franka/log.h
- /home/zmc/libfranka/include/franka/lowpass_filter.h
- /home/zmc/libfranka/include/franka/model.h
- /home/zmc/libfranka/include/franka/rate_limiting.h
- /home/zmc/libfranka/include/franka/robot.h
- /home/zmc/libfranka/include/franka/robot_state.h
  /opt/ros/melodic/include/actionlib/action_definition.h
  /opt/ros/melodic/include/actionlib/decl.h
  /opt/ros/melodic/include/actionlib/destruction_guard.h
@@ -317,6 +306,17 @@ franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_combined_hw.cpp.o
  /opt/ros/melodic/include/urdf/visibility_control.hpp
  /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
  /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+ /usr/local/include/franka/command_types.h
+ /usr/local/include/franka/control_types.h
+ /usr/local/include/franka/duration.h
+ /usr/local/include/franka/errors.h
+ /usr/local/include/franka/exception.h
+ /usr/local/include/franka/log.h
+ /usr/local/include/franka/lowpass_filter.h
+ /usr/local/include/franka/model.h
+ /usr/local/include/franka/rate_limiting.h
+ /usr/local/include/franka/robot.h
+ /usr/local/include/franka/robot_state.h
 franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_hw.cpp.o
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/control_mode.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_cartesian_command_interface.h
@@ -325,15 +325,6 @@ franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_hw.cpp.o
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/resource_helpers.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/src/franka_hw.cpp
- /home/zmc/libfranka/include/franka/command_types.h
- /home/zmc/libfranka/include/franka/control_types.h
- /home/zmc/libfranka/include/franka/duration.h
- /home/zmc/libfranka/include/franka/errors.h
- /home/zmc/libfranka/include/franka/lowpass_filter.h
- /home/zmc/libfranka/include/franka/model.h
- /home/zmc/libfranka/include/franka/rate_limiting.h
- /home/zmc/libfranka/include/franka/robot.h
- /home/zmc/libfranka/include/franka/robot_state.h
  /opt/ros/melodic/include/hardware_interface/controller_info.h
  /opt/ros/melodic/include/hardware_interface/hardware_interface.h
  /opt/ros/melodic/include/hardware_interface/interface_resources.h
@@ -408,6 +399,15 @@ franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/franka_hw.cpp.o
  /opt/ros/melodic/include/urdf/visibility_control.hpp
  /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
  /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
+ /usr/local/include/franka/command_types.h
+ /usr/local/include/franka/control_types.h
+ /usr/local/include/franka/duration.h
+ /usr/local/include/franka/errors.h
+ /usr/local/include/franka/lowpass_filter.h
+ /usr/local/include/franka/model.h
+ /usr/local/include/franka/rate_limiting.h
+ /usr/local/include/franka/robot.h
+ /usr/local/include/franka/robot_state.h
 franka_ros/franka_hw/CMakeFiles/franka_hw.dir/src/resource_helpers.cpp.o
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/control_mode.h
  /home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include/franka_hw/resource_helpers.h

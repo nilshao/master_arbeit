@@ -1,2 +1,2 @@
 Azure_Kinect_ROS_Driver:MarkerTrailer:franka_ros/franka_control:franka_ros/franka_description:franka_ros/franka_example_controllers:franka_ros/franka_gripper:franka_ros/franka_hw:franka_ros/franka_msgs:franka_ros/franka_ros:franka_ros/franka_visualization:pic_reader:preparing:save_info
--G CodeBlocks - Unix Makefiles -DCMAKE_BUILD_TYPE=Debug -DCATKIN_DEVEL_PREFIX=/home/zmc/Desktop/master_arbeit/devel -DCMAKE_INSTALL_PREFIX=/home/zmc/Desktop/master_arbeit/install
+-DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/Desktop/libfranka/build -DCATKIN_DEVEL_PREFIX=/home/zmc/Desktop/master_arbeit/devel -DCMAKE_INSTALL_PREFIX=/home/zmc/Desktop/master_arbeit/install -G Unix Makefiles

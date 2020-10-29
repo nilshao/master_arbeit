@@ -53,7 +53,7 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
-CMAKE_BUILD_TYPE:STRING=Debug
+CMAKE_BUILD_TYPE:STRING=Release
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -227,8 +227,8 @@ EMPY_SCRIPT:STRING=/usr/bin/empy
 //The directory containing a CMake configuration file for Eigen3.
 Eigen3_DIR:PATH=/usr/lib/cmake/eigen3
 
-//No help, variable specified on the command line.
-Franka_DIR:PATH=/home/zmc/libfranka/build
+//The directory containing a CMake configuration file for Franka.
+Franka_DIR:PATH=/usr/local/lib/cmake/Franka
 
 //The directory containing a CMake configuration file for GMock.
 GMock_DIR:PATH=GMock_DIR-NOTFOUND
@@ -381,7 +381,7 @@ franka_description_SOURCE_DIR:STATIC=/home/zmc/Desktop/master_arbeit/src/franka_
 franka_example_controllers_BINARY_DIR:STATIC=/home/zmc/Desktop/master_arbeit/build/franka_ros/franka_example_controllers
 
 //Dependencies for the target
-franka_example_controllers_LIB_DEPENDS:STATIC=general;Franka::Franka;general;/opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/melodic/lib/libeigen_conversions.so;general;franka_hw;general;franka_control_services;general;/home/zmc/libfranka/build/libfranka.so.0.8.0;general;/opt/ros/melodic/lib/libcombined_robot_hw.so;general;/opt/ros/melodic/lib/liburdf.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_model.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_world.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml.so;general;/opt/ros/melodic/lib/librosconsole_bridge.so;general;/opt/ros/melodic/lib/libtf_conversions.so;general;/opt/ros/melodic/lib/libkdl_conversions.so;general;/opt/ros/melodic/lib/liborocos-kdl.so.1.4.0;general;/opt/ros/melodic/lib/libtf.so;general;/opt/ros/melodic/lib/libtf2_ros.so;general;/opt/ros/melodic/lib/libactionlib.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libtf2.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/librealtime_tools.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
+franka_example_controllers_LIB_DEPENDS:STATIC=general;Franka::Franka;general;/opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/melodic/lib/libeigen_conversions.so;general;franka_hw;general;franka_control_services;general;/usr/local/lib/libfranka.so.0.8.0;general;/opt/ros/melodic/lib/libcombined_robot_hw.so;general;/opt/ros/melodic/lib/liburdf.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_model.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_world.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml.so;general;/opt/ros/melodic/lib/librosconsole_bridge.so;general;/opt/ros/melodic/lib/libtf_conversions.so;general;/opt/ros/melodic/lib/libkdl_conversions.so;general;/opt/ros/melodic/lib/liborocos-kdl.so.1.4.0;general;/opt/ros/melodic/lib/libtf.so;general;/opt/ros/melodic/lib/libtf2_ros.so;general;/opt/ros/melodic/lib/libactionlib.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libtf2.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/librealtime_tools.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
 
 //Value Computed by CMake
 franka_example_controllers_SOURCE_DIR:STATIC=/home/zmc/Desktop/master_arbeit/src/franka_ros/franka_example_controllers
@@ -423,7 +423,7 @@ franka_ros_BINARY_DIR:STATIC=/home/zmc/Desktop/master_arbeit/build/franka_ros/fr
 franka_ros_SOURCE_DIR:STATIC=/home/zmc/Desktop/master_arbeit/src/franka_ros/franka_ros
 
 //Dependencies for the target
-franka_state_controller_LIB_DEPENDS:STATIC=general;Franka::Franka;general;/opt/ros/melodic/lib/libcontroller_manager.so;general;franka_hw;general;franka_control_services;general;/home/zmc/libfranka/build/libfranka.so.0.8.0;general;/opt/ros/melodic/lib/libcombined_robot_hw.so;general;/opt/ros/melodic/lib/liburdf.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_model.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_world.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml.so;general;/opt/ros/melodic/lib/librosconsole_bridge.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/librealtime_tools.so;general;/opt/ros/melodic/lib/libtf.so;general;/opt/ros/melodic/lib/libtf2_ros.so;general;/opt/ros/melodic/lib/libactionlib.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libtf2.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
+franka_state_controller_LIB_DEPENDS:STATIC=general;Franka::Franka;general;/opt/ros/melodic/lib/libcontroller_manager.so;general;franka_hw;general;franka_control_services;general;/usr/local/lib/libfranka.so.0.8.0;general;/opt/ros/melodic/lib/libcombined_robot_hw.so;general;/opt/ros/melodic/lib/liburdf.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_model.so;general;/usr/lib/x86_64-linux-gnu/liburdfdom_world.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml.so;general;/opt/ros/melodic/lib/librosconsole_bridge.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/librealtime_tools.so;general;/opt/ros/melodic/lib/libtf.so;general;/opt/ros/melodic/lib/libtf2_ros.so;general;/opt/ros/melodic/lib/libactionlib.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libtf2.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
 
 //Value Computed by CMake
 franka_visualization_BINARY_DIR:STATIC=/home/zmc/Desktop/master_arbeit/build/franka_ros/franka_visualization
@@ -456,7 +456,7 @@ geometry_msgs_DIR:PATH=/opt/ros/melodic/share/geometry_msgs/cmake
 gmock_BINARY_DIR:STATIC=/home/zmc/Desktop/master_arbeit/build/gtest/googlemock
 
 //Dependencies for the target
-gmock_LIB_DEPENDS:STATIC=general;-pthread;
+gmock_LIB_DEPENDS:STATIC=general;-lpthread;
 
 //Value Computed by CMake
 gmock_SOURCE_DIR:STATIC=/usr/src/googletest/googlemock
@@ -465,7 +465,7 @@ gmock_SOURCE_DIR:STATIC=/usr/src/googletest/googlemock
 gmock_build_tests:BOOL=OFF
 
 //Dependencies for the target
-gmock_main_LIB_DEPENDS:STATIC=general;-pthread;
+gmock_main_LIB_DEPENDS:STATIC=general;-lpthread;
 
 //Value Computed by CMake
 googletest-distribution_BINARY_DIR:STATIC=/home/zmc/Desktop/master_arbeit/build/gtest
@@ -477,7 +477,7 @@ googletest-distribution_SOURCE_DIR:STATIC=/usr/src/googletest
 gtest_BINARY_DIR:STATIC=/home/zmc/Desktop/master_arbeit/build/gtest/googlemock/gtest
 
 //Dependencies for the target
-gtest_LIB_DEPENDS:STATIC=general;-pthread;
+gtest_LIB_DEPENDS:STATIC=general;-lpthread;
 
 //Value Computed by CMake
 gtest_SOURCE_DIR:STATIC=/usr/src/googletest/googletest
@@ -499,7 +499,7 @@ gtest_force_shared_crt:BOOL=OFF
 gtest_hide_internal_symbols:BOOL=OFF
 
 //Dependencies for the target
-gtest_main_LIB_DEPENDS:STATIC=general;-pthread;general;gtest;
+gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
 //The directory containing a CMake configuration file for hardware_interface.
 hardware_interface_DIR:PATH=/opt/ros/melodic/share/hardware_interface/cmake

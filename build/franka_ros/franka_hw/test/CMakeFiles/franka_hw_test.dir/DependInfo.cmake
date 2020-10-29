@@ -24,7 +24,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/src/googletest/googletest/include"
-  "/home/zmc/libfranka/include"
+  "/usr/local/include"
   "/home/zmc/Desktop/master_arbeit/src/franka_ros/franka_hw/include"
   )
 
