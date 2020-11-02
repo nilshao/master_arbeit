@@ -53,7 +53,7 @@ class Node():
     def RecordWhenInput(self, time_seq, tvec_single, rvec_single):
 
         RecordSingle = open("Try2.txt", "a")
-        print("type something so that i will record")
+
         cmd_to_record = raw_input()
         # can do sth with cmd_to_record
 
@@ -138,6 +138,7 @@ class Node():
 
 if __name__ == '__main__':
     rospy.init_node("Get_Pic", anonymous=True)
+    print("type something so that i will record")
     my_node = Node()
 #    my_node.start()
 

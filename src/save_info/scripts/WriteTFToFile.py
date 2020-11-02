@@ -18,7 +18,7 @@ from geometry_msgs.msg import PoseStamped
 from franka_msgs.msg import FrankaState
 
 from rospy import init_node, is_shutdown
-marker_pose = PoseStamped()
+marker_pose = Pose ()
 
 class Node():
 
@@ -29,22 +29,20 @@ class Node():
         while not rospy.is_shutdown():
             rospy.spin()
 
-    def RecordAllPosition(self, time_seq, tf_orientation_single, tf_position_single):
+    def RecordAllPosition(self,tf_orientation_single, tf_position_single):
 
         KeepRecord = open("EE_To_Base_Continuous.txt", "a")
-        KeepRecord.write("%i " % (time_seq))
-        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (tf_position_single.x,tf_position_single.y, tf_position_single.z, tf_orientation_single.x, tf_orientation_single.y, tf_orientation_single.z, tf_orientation_single.w ))
+        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (tf_position_single.x,tf_position_single.y, tf_position_single.z,
+                                                                        tf_orientation_single.x, tf_orientation_single.y, tf_orientation_single.z, tf_orientation_single.w ))
         KeepRecord.write("\n")
         KeepRecord.close()
 
-    def RecordWhenInput(self, time_seq, tf_orientation_single, tf_position_single):
+    def RecordWhenInput(self, tf_orientation_single, tf_position_single):
 
         RecordSingle = open("EE_To_Base_Sample.txt", "a")
 
         cmd_to_record = raw_input()
         # can do sth with cmd_to_record
-
-        RecordSingle.write("%i " % (time_seq))
         RecordSingle.write("%5.8f %5.8f %5.8f" % (tf_position_single.x,tf_position_single.y, tf_position_single.z))
         RecordSingle.write("\n")
         RecordSingle.close()
@@ -56,26 +54,22 @@ class Node():
             tf.transformations.quaternion_from_matrix(
                 np.transpose(np.reshape(msg.O_T_EE,
                                         (4, 4))))
-
         initial_quaternion = initial_quaternion / np.linalg.norm(initial_quaternion)
-        marker_pose.pose.orientation.x = initial_quaternion[0]
-        marker_pose.pose.orientation.y = initial_quaternion[1]
-        marker_pose.pose.orientation.z = initial_quaternion[2]
-        marker_pose.pose.orientation.w = initial_quaternion[3]
+        marker_pose.orientation.x = initial_quaternion[0]
+        marker_pose.orientation.y = initial_quaternion[1]
+        marker_pose.orientation.z = initial_quaternion[2]
+        marker_pose.orientation.w = initial_quaternion[3]
 
-        marker_pose.pose.position.x = msg.O_T_EE[12]
-        marker_pose.pose.position.y = msg.O_T_EE[13]
-        marker_pose.pose.position.z = msg.O_T_EE[14]
-
-        marker_pose.header.frame_id = "ee_T_O"
-        marker_pose.header.stamp = rospy.Time.now()
+        marker_pose.position.x = msg.O_T_EE[12]
+        marker_pose.position.y = msg.O_T_EE[13]
+        marker_pose.position.z = msg.O_T_EE[14]
 
         global initial_pose_found
         initial_pose_found = True
 
         try:
-            thread.start_new_thread( self.RecordAllPosition, (marker_pose.header.seq, marker_pose.pose.orientation,marker_pose.pose.position) )
-            thread.start_new_thread( self.RecordWhenInput, (marker_pose.header.seq, marker_pose.pose.orientation,marker_pose.pose.position) )
+            thread.start_new_thread( self.RecordAllPosition, (marker_pose.orientation,marker_pose.position) )
+            thread.start_new_thread( self.RecordWhenInput, (marker_pose.orientation,marker_pose.position) )
         except:
             print "Error: unable to start thread of Marker"
 

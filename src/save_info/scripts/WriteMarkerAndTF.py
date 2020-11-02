@@ -33,8 +33,14 @@ matrix_coefficients = np.array([np.array([606.6464233398438,    0.0,            
                                 np.array([0.0,                  0.0,                    1.0])])
 distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582,     0.00045736812171526253,     -0.00019684531434904784,
                                     1.499117374420166,      0.39795395731925964,    -2.4385111331939697,        1.4303737878799438])
-marker_pose = PoseStamped()
+
+
+
+#write information
+ee_to_base = Pose ()
 initial_pose_found = False
+
+marker_to_c = Pose ()
 
 class Node():
 
@@ -48,18 +54,37 @@ class Node():
         while not rospy.is_shutdown():
             rospy.spin()
 
-    def RecordAllPosition(self, time_seq, tvec_single, rvec_single):
+    def TFRecordAllPosition(self, tf_orientation_single, tf_position_single):
 
-        KeepRecord = open("MarkerToCamera.txt", "a")
+        KeepRecord = open("EE_To_Base_Continuous.txt", "a")
+        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
+        tf_position_single.x, tf_position_single.y, tf_position_single.z,
+        tf_orientation_single.x, tf_orientation_single.y, tf_orientation_single.z, tf_orientation_single.w))
+        KeepRecord.write("\n")
+        KeepRecord.close()
+
+    def TFRecordWhenInput(self, tf_orientation_single, tf_position_single):
+
+        RecordSingle = open("EE_To_Base_Sample.txt", "a")
+
+        cmd_to_record = raw_input()
+        # can do sth with cmd_to_record
+
+        RecordSingle.write("%5.8f %5.8f %5.8f" % (tf_position_single.x, tf_position_single.y, tf_position_single.z))
+        RecordSingle.write("\n")
+        RecordSingle.close()
+    def MarkerRecordAllPosition(self, time_seq, tvec_single, rvec_single):
+
+        KeepRecord = open("Marker_To_Camera_Continuous.txt", "a")
         KeepRecord.write("%i " % (time_seq))
         KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2], rvec_single[0], rvec_single[1], rvec_single[2]))
         KeepRecord.write("\n")
         KeepRecord.close()
 
-    def RecordWhenInput(self, time_seq, tvec_single, rvec_single):
+    def MarkerRecordWhenInput(self, time_seq, tvec_single, rvec_single):
 
-        RecordSingle = open("Try2.txt", "a")
-        print("type something so that i will record")
+        RecordSingle = open("Marker_To_Camera_Sample.txt", "a")
+
         cmd_to_record = raw_input()
         # can do sth with cmd_to_record
 
@@ -67,7 +92,7 @@ class Node():
         RecordSingle.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2]))
         RecordSingle.write("\n")
         RecordSingle.close()
-
+        
     def franka_state_callback(self,msg):
 
         initial_quaternion = \
@@ -75,16 +100,24 @@ class Node():
                 np.transpose(np.reshape(msg.O_T_EE,
                                         (4, 4))))
         initial_quaternion = initial_quaternion / np.linalg.norm(initial_quaternion)
-        marker_pose.pose.orientation.x = initial_quaternion[0]
-        marker_pose.pose.orientation.y = initial_quaternion[1]
-        marker_pose.pose.orientation.z = initial_quaternion[2]
-        marker_pose.pose.orientation.w = initial_quaternion[3]
-        marker_pose.pose.position.x = msg.O_T_EE[12]
-        marker_pose.pose.position.y = msg.O_T_EE[13]
-        marker_pose.pose.position.z = msg.O_T_EE[14]
+        ee_to_base.orientation.x = initial_quaternion[0]
+        ee_to_base.orientation.y = initial_quaternion[1]
+        ee_to_base.orientation.z = initial_quaternion[2]
+        ee_to_base.orientation.w = initial_quaternion[3]
+        ee_to_base.position.x = msg.O_T_EE[12]
+        ee_to_base.position.y = msg.O_T_EE[13]
+        ee_to_base.position.z = msg.O_T_EE[14]
+
         global initial_pose_found
-        print(msg.O_T_EE)
         initial_pose_found = True
+
+        # thread.start_new_thread ( function, args[, kwargs] )
+        # Create two threads as follows
+        try:
+            thread.start_new_thread(self.TFRecordAllPosition, (ee_to_base.orientation, ee_to_base.position))
+            thread.start_new_thread(self.TFRecordWhenInput, (ee_to_base.orientation, ee_to_base.position))
+        except:
+            print "Error: unable to start thread"
 
 
     def image_callback(self,img_msg):
@@ -132,28 +165,24 @@ class Node():
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
-                #write information
-                single_pose = Pose ()
+                marker_to_c.position.x = float(tvec[i][0][0])
+                marker_to_c.position.y = float(tvec[i][0][1])
+                marker_to_c.position.z = float(tvec[i][0][2])
 
-                single_pose.position.x = float(tvec[i][0][0])
-                single_pose.position.y = float(tvec[i][0][1])
-                single_pose.position.z = float(tvec[i][0][2])
+                marker_to_c.orientation.x = quaternion[0]
+                marker_to_c.orientation.y = quaternion[1]
+                marker_to_c.orientation.z = quaternion[2]
+                marker_to_c.orientation.w = quaternion[3]
 
-                single_pose.orientation.x = quaternion[0]
-                single_pose.orientation.y = quaternion[1]
-                single_pose.orientation.z = quaternion[2]
-                single_pose.orientation.w = quaternion[3]
+                pose_information.poses.append(marker_to_c)
 
-                pose_information.poses.append(single_pose)
-#                print("tvec is: ",tvec[i][0])
-
-                #thread.start_new_thread ( function, args[, kwargs] )
                 # Create two threads as follows
                 try:
-                    thread.start_new_thread( self.RecordAllPosition, (img_msg.header.seq, rvec[i][0],tvec[i][0]) )
-                    thread.start_new_thread( self.RecordWhenInput, (img_msg.header.seq, rvec[i][0],tvec[i][0]) )
+                    thread.start_new_thread(self.MarkerRecordAllPosition, (img_msg.header.seq, rvec[i][0], tvec[i][0]))
+                    thread.start_new_thread(self.MarkerRecordWhenInput, (img_msg.header.seq, rvec[i][0], tvec[i][0]))
                 except:
-                    print "Error: unable to start thread"
+                    print
+                    "Error: unable to start thread of Marker"
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
