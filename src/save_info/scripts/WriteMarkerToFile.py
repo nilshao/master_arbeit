@@ -34,7 +34,6 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
                                     1.499117374420166,      0.39795395731925964,    -2.4385111331939697,        1.4303737878799438])
 
 class Node():
-
     def __init__(self):
         
         self.bridge = CvBridge()
@@ -129,7 +128,7 @@ class Node():
                     thread.start_new_thread( self.RecordAllPosition, (img_msg.header.seq, rvec[i][0],tvec[i][0]) )
                     thread.start_new_thread( self.RecordWhenInput, (img_msg.header.seq, rvec[i][0],tvec[i][0]) )
                 except:
-                    print "Error: unable to start thread"
+                    print "Error: unable to start thread of Marker"
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)

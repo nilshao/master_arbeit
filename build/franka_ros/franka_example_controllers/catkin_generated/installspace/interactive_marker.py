@@ -27,8 +27,7 @@ def publisherCallback(msg, link_name):
 def franka_state_callback(msg):
     initial_quaternion = \
         tf.transformations.quaternion_from_matrix(
-            np.transpose(np.reshape(msg.O_T_EE,
-                                    (4, 4))))
+            np.transpose(np.reshape(msg.O_T_EE, (4, 4))))
     initial_quaternion = initial_quaternion / np.linalg.norm(initial_quaternion)
     marker_pose.pose.orientation.x = initial_quaternion[0]
     marker_pose.pose.orientation.y = initial_quaternion[1]

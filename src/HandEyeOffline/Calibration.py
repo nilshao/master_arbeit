@@ -10,11 +10,11 @@ from camera_handler import CameraHandler
 #ee: end efector
 
 # camera 1
-CAMERA_INTRINSICS_MAT =  np.array([np.array([606.6464233398438,    0.0,                    639.0460205078125]),
-                                np.array([0.0,                  606.6519775390625,      368.244140625]),
-                                np.array([0.0,                  0.0,                    1.0])])
-CAMERA_DISTORTION_COEFF_MAT = np.array([0.5164358615875244,     -2.606694221496582,     0.00045736812171526253,     -0.00019684531434904784,
-                                    1.499117374420166,      0.39795395731925964,    -2.4385111331939697,        1.4303737878799438])
+CAMERA_INTRINSICS_MAT =  np.array([np.array([970.63427734375, 0.0, 1022.773681640625]),
+                                    np.array([0.0, 970.6431884765625, 781.4906005859375]),
+                                    np.array([0.0, 0.0, 1.0])])
+CAMERA_DISTORTION_COEFF_MAT = np.array([0.5164358615875244, -2.606694221496582, 0.00045736812171526253, -0.00019684531434904784,
+                                        1.499117374420166, 0.39795395731925964, -2.4385111331939697, 1.4303737878799438])
 ARUCO_NAME = cv2.aruco.DICT_5X5_100
 MARKER_SIDE_LENGTH_MM = 0.0996
 
@@ -36,6 +36,90 @@ class HandEyeCalibration():
         img = cv2.aruco.drawMarker(self.aruco_dict, 0, 700)
         plt.imshow(img, cmap=mpl.cm.gray)
         plt.show()
+    def read_ee_to_base_poses_from_file(self, filename):
+        self.ee_to_base_poses_list = []
+        with open(filename, 'r') as f:
+            for line_id, line in enumerate(f):
+                row = line.strip("\n").split(",")
+                row = np.array([float(x) for x in row], dtype=np.float32)
+                A_i = row.reshape((4, 4))
+                A_i = A_i.T
+                self.ee_to_base_poses_list.append(A_i)
+                self.R_ee_to_base_poses_list.append(A_i[0:3,0:3])
+                self.t_ee_to_base_poses_list.append(A_i[0:3,3])
+
+    def save_images_with_key(self, save_dir):
+        self.realsense_handler.save_left_camera_images(save_dir)
+
+    def get_images_list_from_dir(self, images_dir):
+        assert(os.path.exists(images_dir))
+        image_paths_list = sorted(os.listdir(images_dir))
+        images_list = []
+        for image_idx, image_name in enumerate(image_paths_list):
+            image_path = os.path.join(images_dir, image_name)
+            image = cv2.imread(image_path)
+            images_list.append(image)
+        return images_list
+
+    def compute_A(self):
+        A = np.zeros((4, (len(self.ee_to_base_poses_list)-1)*4))
+        for pose_idx, (current_pose, next_pose) in enumerate(zip(self.ee_to_base_poses_list)):
+            A_i = np.linalg.inv(next_pose) @ current_pose
+            A[:, pose_idx * 4: pose_idx * 4 + 4] = A_i
+        return A
+
+    def compute_B(self):
+        B = np.zeros((4, (len(self.marker_to_cam_poses_list)-1)*4))
+        for pose_idx, (current_pose, next_pose) in enumerate(zip(self.marker_to_cam_poses_list[:-1], self.marker_to_cam_poses_list[1:])):
+            B_i = next_pose @ np.linalg.inv(current_pose)
+            B[:, pose_idx * 4: pose_idx * 4 + 4] = B_i
+        return B
+
+    def get_poses_from_images(self, images_list):
+        self.marker_to_cam_poses_list = []
+        for image_idx, image in enumerate(images_list):
+            self.marker_to_cam_poses_list.append(
+                self.get_pose_from_one_image(image))
+            self.R_marker_to_cam_poses_list.append(
+                self.get_pose_from_one_image(image)[0:3,0:3]
+            )
+            self.t_marker_to_cam_poses_list.append(
+                self.get_pose_from_one_image(image)[0:3,-1]
+            )
+
+    def get_pose_from_one_image(self, image):
+        marker_corners = self.detect_aruco_corners(image)
+        rot_vec, trans_vec, _ = cv2.aruco.estimatePoseSingleMarkers(
+            marker_corners, self.marker_side_length_mm, self.cam_intr_mat, self.cam_dist_coeff_mat)
+        rot_vec = rot_vec.reshape(3,)
+        sci_rotation = Rotation.from_rotvec(rot_vec)
+        rot_mat = sci_rotation.as_matrix()
+        trans_mat = np.concatenate(
+            [rot_mat, trans_vec.reshape((3, 1))], axis=1)
+        trans_mat = np.concatenate(
+            [trans_mat, np.array([0, 0, 0, 1]).reshape((1, 4))], axis=0)
+        return trans_mat
+
+    def detect_aruco_corners(self, image):
+        marker_corners, marker_ids, rejected_candidates = cv2.aruco.detectMarkers(
+            image, self.aruco_dict, parameters=self.detector_parameters)
+        return marker_corners
+
+    def test_opencv_key_press(self):
+        cap = cv2.VideoCapture(0)
+        counter = 0
+        while(cap.isOpened()):
+            ret, frame = cap.read()
+            if ret:
+                cv2.imshow('frame', frame)
+            k = cv2.waitKey(33)
+            if k == ord('s'):
+                cv2.imwrite('{0:06}.png'.format(counter), frame)
+                counter += 1
+            elif k == ord('q'):
+                break
+
+        cap.release()
 
 if __name__ == '__main__':  
     calib = HandEyeCalibration(
@@ -52,6 +136,7 @@ if __name__ == '__main__':
     calib.get_poses_from_images(img_list)
     R_marker_cam = calib.R_marker_to_cam_poses_list
     t_marker_cam = calib.t_marker_to_cam_poses_list
+
     R_cam_marker = []
     t_cam_marker = []
     
@@ -78,3 +163,4 @@ if __name__ == '__main__':
     
     T_cam_base = T_ee_base[0].dot(T_marker_to_ee).dot(T_cam_marker)
     print(T_cam_base)
+
