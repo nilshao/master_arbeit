@@ -93,20 +93,20 @@ class Node():
         RecordSingle.write("\n")
         RecordSingle.close()
         
-    def franka_state_callback(self,msg):
+    def franka_state_callback(self, tf_msg):
 
         initial_quaternion = \
             tf.transformations.quaternion_from_matrix(
-                np.transpose(np.reshape(msg.O_T_EE,
+                np.transpose(np.reshape(tf_msg.O_T_EE,
                                         (4, 4))))
         initial_quaternion = initial_quaternion / np.linalg.norm(initial_quaternion)
         ee_to_base.orientation.x = initial_quaternion[0]
         ee_to_base.orientation.y = initial_quaternion[1]
         ee_to_base.orientation.z = initial_quaternion[2]
         ee_to_base.orientation.w = initial_quaternion[3]
-        ee_to_base.position.x = msg.O_T_EE[12]
-        ee_to_base.position.y = msg.O_T_EE[13]
-        ee_to_base.position.z = msg.O_T_EE[14]
+        ee_to_base.position.x = tf_msg.O_T_EE[12]
+        ee_to_base.position.y = tf_msg.O_T_EE[13]
+        ee_to_base.position.z = tf_msg.O_T_EE[14]
 
         global initial_pose_found
         initial_pose_found = True
@@ -181,8 +181,7 @@ class Node():
                     thread.start_new_thread(self.MarkerRecordAllPosition, (img_msg.header.seq, rvec[i][0], tvec[i][0]))
                     thread.start_new_thread(self.MarkerRecordWhenInput, (img_msg.header.seq, rvec[i][0], tvec[i][0]))
                 except:
-                    print
-                    "Error: unable to start thread of Marker"
+                    print "Error: unable to start thread of Marker"
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
