@@ -50,7 +50,7 @@ class Node():
     def callback(self,img_msg, tf_msg):
         # Solve all of perception here...
 
-
+    ctmd tobias
     def __init__(self):
 
         self.bridge = CvBridge()
