@@ -8,9 +8,7 @@ import tf
 import math
 import thread
 import time
-import message_filters
 
-from message_filters import ApproximateTimeSynchronizer, Subscriber
 from cv_bridge import CvBridge, CvBridgeError
 
 from sensor_msgs.msg import Image
@@ -50,19 +48,51 @@ class Node():
 
         self.bridge = CvBridge()
 
-        sub_image = message_filters.Subscriber("/rgb/image_raw", Image, queue_size=1, buff_size=2**24)
-        sub_pose = message_filters.Subscriber("franka_state_controller/franka_states",FrankaState, queue_size=1, buff_size=2**24)
-
-        ts = message_filters.ApproximateTimeSynchronizer([sub_image, sub_pose], queue_size=5, slop=0.1)
-        ts.registerCallback(self.callback)
+        sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
+        sub_pose = rospy.Subscriber("franka_state_controller/franka_states",FrankaState, self.franka_state_callback)
 
         while not rospy.is_shutdown():
             rospy.spin()
 
-    def callback(self, image_topic_input,pose_topic_input):
-        print(self.image_callback(image_topic_input))
-        print(self.franka_state_callback(pose_topic_input))
+    def TFRecordAllPosition(self, tf_orientation_single, tf_position_single):
 
+        KeepRecord = open("EE_To_Base_Continuous.txt", "a")
+        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
+        tf_position_single.x, tf_position_single.y, tf_position_single.z,
+        tf_orientation_single.x, tf_orientation_single.y, tf_orientation_single.z, tf_orientation_single.w))
+        KeepRecord.write("\n")
+        KeepRecord.close()
+
+    def TFRecordWhenInput(self, tf_orientation_single, tf_position_single):
+
+        RecordSingle = open("EE_To_Base_Sample.txt", "a")
+
+        cmd_to_record = raw_input()
+        # can do sth with cmd_to_record
+
+        RecordSingle.write("%5.8f %5.8f %5.8f" % (tf_position_single.x, tf_position_single.y, tf_position_single.z))
+        RecordSingle.write("\n")
+        RecordSingle.close()
+    def MarkerRecordAllPosition(self, time_seq, tvec_single, rvec_single):
+
+        KeepRecord = open("Marker_To_Camera_Continuous.txt", "a")
+        KeepRecord.write("%i " % (time_seq))
+        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2], rvec_single[0], rvec_single[1], rvec_single[2]))
+        KeepRecord.write("\n")
+        KeepRecord.close()
+
+    def MarkerRecordWhenInput(self, time_seq, tvec_single, rvec_single):
+
+        RecordSingle = open("Marker_To_Camera_Sample.txt", "a")
+
+        cmd_to_record = raw_input()
+        # can do sth with cmd_to_record
+
+        RecordSingle.write("%i " % (time_seq))
+        RecordSingle.write("%5.8f %5.8f %5.8f" % (tvec_single[0], tvec_single[1], tvec_single[2]))
+        RecordSingle.write("\n")
+        RecordSingle.close()
+        
     def franka_state_callback(self, tf_msg):
 
         initial_quaternion = \
@@ -80,6 +110,15 @@ class Node():
 
         global initial_pose_found
         initial_pose_found = True
+
+        # thread.start_new_thread ( function, args[, kwargs] )
+        # Create two threads as follows
+        try:
+            thread.start_new_thread(self.TFRecordAllPosition, (ee_to_base.orientation, ee_to_base.position))
+            thread.start_new_thread(self.TFRecordWhenInput, (ee_to_base.orientation, ee_to_base.position))
+        except:
+            print "Error: unable to start thread"
+
 
     def image_callback(self,img_msg):
         # log some info about the image topic
@@ -137,6 +176,12 @@ class Node():
 
                 pose_information.poses.append(marker_to_c)
 
+                # Create two threads as follows
+                try:
+                    thread.start_new_thread(self.MarkerRecordAllPosition, (img_msg.header.seq, rvec[i][0], tvec[i][0]))
+                    thread.start_new_thread(self.MarkerRecordWhenInput, (img_msg.header.seq, rvec[i][0], tvec[i][0]))
+                except:
+                    print "Error: unable to start thread of Marker"
 
         #publish to the topic
         pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)

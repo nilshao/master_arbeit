@@ -59,9 +59,61 @@ class Node():
         while not rospy.is_shutdown():
             rospy.spin()
 
+    def RecordAllInfo(self, marker_single, pose_single):
+
+        KeepRecord = open("ContinousRecording.txt", "a")
+        if marker_single != "no marker found":
+            KeepRecord.write("%d %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
+                marker_single[0][0],  marker_single[0][1],  marker_single[0][2], marker_single[0][3],
+                marker_single[0][4],  marker_single[0][5],  marker_single[0][6], marker_single[0][7]))
+        else:
+            KeepRecord.write("no marker found")
+        KeepRecord.write("\n")
+        KeepRecord.write("-------------------------------------------------------------------------")
+        KeepRecord.write("\n")
+        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
+            pose_single[0], pose_single[1], pose_single[2], pose_single[3],
+            pose_single[4], pose_single[5], pose_single[6]))
+        KeepRecord.write("\n")
+        KeepRecord.write("=========================================================================")
+        KeepRecord.write("\n")
+        KeepRecord.close()
+
+    def RecordWhenInput(self, marker_single, pose_single):
+
+        Record_Once = open("RecordWhenTypeIn.txt", "a")
+
+        cmd_to_record = raw_input()
+        # can do sth with cmd_to_record
+
+        if marker_single != "no marker found" :
+            Record_Once.write("%d %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
+                marker_single[0][0], marker_single[0][1], marker_single[0][2], marker_single[0][3],
+                marker_single[0][4], marker_single[0][5], marker_single[0][6], marker_single[0][7]))
+        else:
+            Record_Once.write("no marker found")
+        Record_Once.write("\n")
+        Record_Once.write("-------------------------------------------------------------------------")
+        Record_Once.write("\n")
+        Record_Once.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
+            pose_single[0], pose_single[1], pose_single[2], pose_single[3],
+            pose_single[4], pose_single[5], pose_single[6]))
+        Record_Once.write("\n")
+        Record_Once.write("=========================================================================")
+        Record_Once.write("\n")
+        Record_Once.close()
+
     def callback(self, image_topic_input,pose_topic_input):
-        print(self.image_callback(image_topic_input))
-        print(self.franka_state_callback(pose_topic_input))
+        image_callback_info = self.image_callback(image_topic_input)
+        pose_callback_info = self.franka_state_callback(pose_topic_input)
+        print(image_callback_info)
+
+        try:
+            thread.start_new_thread(self.RecordAllInfo, (image_callback_info, pose_callback_info))
+            thread.start_new_thread(self.RecordWhenInput, (image_callback_info, pose_callback_info))
+        except:
+            print
+            "Error: unable to start thread"
 
     def franka_state_callback(self, tf_msg):
 
@@ -78,8 +130,9 @@ class Node():
         ee_to_base.position.y = tf_msg.O_T_EE[13]
         ee_to_base.position.z = tf_msg.O_T_EE[14]
 
-        global initial_pose_found
-        initial_pose_found = True
+        tf_output_msg = (ee_to_base.orientation.x,ee_to_base.orientation.y,ee_to_base.orientation.z,ee_to_base.orientation.w,
+                         ee_to_base.position.x,ee_to_base.position.y,ee_to_base.position.z)
+        return tf_output_msg
 
     def image_callback(self,img_msg):
         # log some info about the image topic
@@ -97,20 +150,21 @@ class Node():
         # lists of ids and the corners beloning to each id
 
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
+        if np.all(ids is not None):
+            # First initialize a PoseArry message
+            pose_information = PoseArray()
+            pose_information.header.frame_id = "rgb_camera_link"
+            pose_information.header.stamp = rospy.Time.now()
 
-        # First initialize a PoseArry message
-        pose_information = PoseArray ()
-        pose_information.header.frame_id = "rgb_camera_link"
-        pose_information.header.stamp = rospy.Time.now()
-
-        if np.all(ids is not None):  # If there are markers found by detector
             num_of_markers = ids.size
-            res = aruco.estimatePoseSingleMarkers(corners, ARUCO_SIZE_METER, (matrix_coefficients), (distortion_coefficients))
-            rvec=res[0]
-            tvec=res[1]
-          #  markerPoints=res[2]
+            res = aruco.estimatePoseSingleMarkers(corners, ARUCO_SIZE_METER, (matrix_coefficients),
+                                                  (distortion_coefficients))
+            rvec = res[0]
+            tvec = res[1]
+            #  markerPoints=res[2]
 
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
+            marker_output_msg = ()
             for i in range(0, ids.size):  # Iterate in markers
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i][0], tvec[i][0], 0.1)
@@ -120,7 +174,7 @@ class Node():
                                             [0, 0, 0, 0],
                                             [0, 0, 0, 0],
                                             [0, 0, 0, 1]],
-                                            dtype=float)
+                                           dtype=float)
                 rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i][0])
 
                 # convert the matrix to a quaternion
@@ -136,13 +190,20 @@ class Node():
                 marker_to_c.orientation.w = quaternion[3]
 
                 pose_information.poses.append(marker_to_c)
+                marker_single_info = (ids[0][i],
+                                      marker_to_c.orientation.x, marker_to_c.orientation.y, marker_to_c.orientation.z, marker_to_c.orientation.w,
+                                      marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
+                marker_output_msg = marker_output_msg + (marker_single_info,)
 
-
-        #publish to the topic
-        pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
-        rate = rospy.Rate(30) # Hz
-        pub.publish(pose_information)
-        rate.sleep()
+            print(marker_output_msg)
+            # publish to the topic
+            pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
+            rate = rospy.Rate(30)  # Hz
+            pub.publish(pose_information)
+            rate.sleep()
+            return marker_output_msg
+        else:
+            return "no marker found"
 
 if __name__ == '__main__':
     rospy.init_node("Get_Pic", anonymous=True)
