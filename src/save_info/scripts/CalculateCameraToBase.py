@@ -48,6 +48,7 @@ class Node():
 
     def __init__(self):
 
+
         self.bridge = CvBridge()
 
         sub_image = message_filters.Subscriber("/rgb/image_raw", Image, queue_size=1, buff_size=2**24)
@@ -104,8 +105,8 @@ class Node():
         Record_Once.close()
 
     def callback(self, image_topic_input,pose_topic_input):
-        image_callback_info = self.image_callback(image_topic_input)
-        pose_callback_info = self.franka_state_callback(pose_topic_input)
+        image_callback_info, matrix_camera2marker = self.image_callback(image_topic_input)
+        pose_callback_info, matrix_base2ee = self.franka_state_callback(pose_topic_input)
         print(image_callback_info)
 
         try:
@@ -132,7 +133,8 @@ class Node():
 
         tf_output_msg = (ee_to_base.orientation.x,ee_to_base.orientation.y,ee_to_base.orientation.z,ee_to_base.orientation.w,
                          ee_to_base.position.x,ee_to_base.position.y,ee_to_base.position.z)
-        return tf_output_msg
+
+        return tf_output_msg, tf_msg.O_T_EE
 
     def image_callback(self,img_msg):
         # log some info about the image topic

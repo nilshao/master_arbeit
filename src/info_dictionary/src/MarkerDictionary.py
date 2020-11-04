@@ -43,96 +43,19 @@ ee_to_base = Pose ()
 initial_pose_found = False
 
 marker_to_c = Pose ()
+marker_to_c_dic = {}
 
 class Node():
 
     def __init__(self):
-
         self.bridge = CvBridge()
-
-        sub_image = message_filters.Subscriber("/rgb/image_raw", Image, queue_size=1, buff_size=2**24)
-        sub_pose = message_filters.Subscriber("franka_state_controller/franka_states",FrankaState, queue_size=1, buff_size=2**24)
-
-        ts = message_filters.ApproximateTimeSynchronizer([sub_image, sub_pose], queue_size=5, slop=0.1)
-        ts.registerCallback(self.callback)
+        sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.callback)
 
         while not rospy.is_shutdown():
             rospy.spin()
 
-    def RecordAllInfo(self, marker_single, pose_single):
-
-        KeepRecord = open("ContinousRecording.txt", "a")
-        if marker_single != "no marker found":
-            KeepRecord.write("%d %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
-                marker_single[0][0],  marker_single[0][1],  marker_single[0][2], marker_single[0][3],
-                marker_single[0][4],  marker_single[0][5],  marker_single[0][6], marker_single[0][7]))
-        else:
-            KeepRecord.write("no marker found")
-        KeepRecord.write("\n")
-        KeepRecord.write("-------------------------------------------------------------------------")
-        KeepRecord.write("\n")
-        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
-            pose_single[0], pose_single[1], pose_single[2], pose_single[3],
-            pose_single[4], pose_single[5], pose_single[6]))
-        KeepRecord.write("\n")
-        KeepRecord.write("=========================================================================")
-        KeepRecord.write("\n")
-        KeepRecord.close()
-
-    def RecordWhenInput(self, marker_single, pose_single):
-
-        Record_Once = open("RecordWhenTypeIn.txt", "a")
-
-        cmd_to_record = raw_input()
-        # can do sth with cmd_to_record
-
-        if marker_single != "no marker found" :
-            Record_Once.write("%d %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
-                marker_single[0][0], marker_single[0][1], marker_single[0][2], marker_single[0][3],
-                marker_single[0][4], marker_single[0][5], marker_single[0][6], marker_single[0][7]))
-        else:
-            Record_Once.write("no marker found")
-        Record_Once.write("\n")
-        Record_Once.write("-------------------------------------------------------------------------")
-        Record_Once.write("\n")
-        Record_Once.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
-            pose_single[0], pose_single[1], pose_single[2], pose_single[3],
-            pose_single[4], pose_single[5], pose_single[6]))
-        Record_Once.write("\n")
-        Record_Once.write("=========================================================================")
-        Record_Once.write("\n")
-        Record_Once.close()
-
     def callback(self, image_topic_input,pose_topic_input):
         image_callback_info = self.image_callback(image_topic_input)
-        pose_callback_info = self.franka_state_callback(pose_topic_input)
-        print(image_callback_info)
-
-        try:
-            thread.start_new_thread(self.RecordAllInfo, (image_callback_info, pose_callback_info))
-            thread.start_new_thread(self.RecordWhenInput, (image_callback_info, pose_callback_info))
-        except:
-            print
-            "Error: unable to start thread"
-
-    def franka_state_callback(self, tf_msg):
-
-        initial_quaternion = \
-            tf.transformations.quaternion_from_matrix(
-                np.transpose(np.reshape(tf_msg.O_T_EE,
-                                        (4, 4))))
-        initial_quaternion = initial_quaternion / np.linalg.norm(initial_quaternion)
-        ee_to_base.orientation.x = initial_quaternion[0]
-        ee_to_base.orientation.y = initial_quaternion[1]
-        ee_to_base.orientation.z = initial_quaternion[2]
-        ee_to_base.orientation.w = initial_quaternion[3]
-        ee_to_base.position.x = tf_msg.O_T_EE[12]
-        ee_to_base.position.y = tf_msg.O_T_EE[13]
-        ee_to_base.position.z = tf_msg.O_T_EE[14]
-
-        tf_output_msg = (ee_to_base.orientation.x,ee_to_base.orientation.y,ee_to_base.orientation.z,ee_to_base.orientation.w,
-                         ee_to_base.position.x,ee_to_base.position.y,ee_to_base.position.z)
-        return tf_output_msg
 
     def image_callback(self,img_msg):
         # log some info about the image topic
@@ -176,7 +99,10 @@ class Node():
                                             [0, 0, 0, 1]],
                                            dtype=float)
                 rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i][0])
-
+                rotation_matrix[0][3] = tvec[i][0][0]
+                rotation_matrix[1][3] = tvec[i][0][1]
+                rotation_matrix[2][3] = tvec[i][0][2]
+                marker_to_c_dic[ids[i]] == rotation_matrix
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
@@ -195,7 +121,7 @@ class Node():
                                       marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
                 marker_output_msg = marker_output_msg + (marker_single_info,)
 
-            print(marker_output_msg)
+
             # publish to the topic
             pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
             rate = rospy.Rate(30)  # Hz

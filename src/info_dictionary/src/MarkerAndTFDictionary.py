@@ -38,11 +38,13 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
 
 
 
-#write information
+#initialize for writing information
 ee_to_base = Pose ()
-initial_pose_found = False
-
 marker_to_c = Pose ()
+marker_to_c_dic = {}
+marker_to_ee_dic = {}
+joint_to_base_dic = {}
+initial_pose_found = False
 
 class Node():
 
@@ -59,61 +61,27 @@ class Node():
         while not rospy.is_shutdown():
             rospy.spin()
 
-    def RecordAllInfo(self, marker_single, pose_single):
 
-        KeepRecord = open("ContinousRecording.txt", "a")
-        if marker_single != "no marker found":
-            KeepRecord.write("%d %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
-                marker_single[0][0],  marker_single[0][1],  marker_single[0][2], marker_single[0][3],
-                marker_single[0][4],  marker_single[0][5],  marker_single[0][6], marker_single[0][7]))
-        else:
-            KeepRecord.write("no marker found")
-        KeepRecord.write("\n")
-        KeepRecord.write("-------------------------------------------------------------------------")
-        KeepRecord.write("\n")
-        KeepRecord.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
-            pose_single[0], pose_single[1], pose_single[2], pose_single[3],
-            pose_single[4], pose_single[5], pose_single[6]))
-        KeepRecord.write("\n")
-        KeepRecord.write("=========================================================================")
-        KeepRecord.write("\n")
-        KeepRecord.close()
-
-    def RecordWhenInput(self, marker_single, pose_single):
-
-        Record_Once = open("RecordWhenTypeIn.txt", "a")
-
-        cmd_to_record = raw_input()
-        # can do sth with cmd_to_record
-
-        if marker_single != "no marker found" :
-            Record_Once.write("%d %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
-                marker_single[0][0], marker_single[0][1], marker_single[0][2], marker_single[0][3],
-                marker_single[0][4], marker_single[0][5], marker_single[0][6], marker_single[0][7]))
-        else:
-            Record_Once.write("no marker found")
-        Record_Once.write("\n")
-        Record_Once.write("-------------------------------------------------------------------------")
-        Record_Once.write("\n")
-        Record_Once.write("%5.8f %5.8f %5.8f %5.8f %5.8f %5.8f %5.8f" % (
-            pose_single[0], pose_single[1], pose_single[2], pose_single[3],
-            pose_single[4], pose_single[5], pose_single[6]))
-        Record_Once.write("\n")
-        Record_Once.write("=========================================================================")
-        Record_Once.write("\n")
-        Record_Once.close()
 
     def callback(self, image_topic_input,pose_topic_input):
         image_callback_info = self.image_callback(image_topic_input)
         pose_callback_info = self.franka_state_callback(pose_topic_input)
-        print(image_callback_info)
 
-        try:
-            thread.start_new_thread(self.RecordAllInfo, (image_callback_info, pose_callback_info))
-            thread.start_new_thread(self.RecordWhenInput, (image_callback_info, pose_callback_info))
-        except:
-            print
-            "Error: unable to start thread"
+        calibrated_info = self.calibration_func()
+        print(calibrated_info)
+
+    def calibration_func(self):
+        #res
+        res ={}
+        for i in marker_to_c_dic:
+            T_marker_to_camera  = marker_to_c_dic[i]
+            T_joint_to_base     = joint_to_base_dic[i]
+            T_marker_to_ee      = marker_to_ee_dic[i]
+            T_marker_to_camera_inv = np.linalg(T_marker_to_camera)
+            res_tmp = (T_joint_to_base.dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
+            res[i] = res_tmp
+
+        return res
 
     def franka_state_callback(self, tf_msg):
 
@@ -176,6 +144,11 @@ class Node():
                                             [0, 0, 0, 1]],
                                            dtype=float)
                 rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i][0])
+
+                rotation_matrix[0][3] = tvec[i][0][0]
+                rotation_matrix[1][3] = tvec[i][0][1]
+                rotation_matrix[2][3] = tvec[i][0][2]
+                marker_to_c_dic[ids[i]] == rotation_matrix
 
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
