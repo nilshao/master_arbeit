@@ -1,5 +1,12 @@
 #!/usr/bin/env python2.7
+'''
+                                        former programm V1.0 
 
+        in this script, i calculate the matrix using kinematic chain.
+        Problem and Work to do:
+            1. test the inverse of a 4X4 homogeneous matrix
+            2. visualize the position of camera
+'''
 import rospy
 import numpy as np
 import cv2
