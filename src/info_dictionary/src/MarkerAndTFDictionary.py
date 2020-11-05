@@ -37,7 +37,6 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
                                     1.499117374420166,      0.39795395731925964,    -2.4385111331939697,        1.4303737878799438])
 
 
-
 #initialize for writing information
 ee_to_base = Pose ()
 marker_to_c = Pose ()
@@ -49,7 +48,7 @@ initial_pose_found = False
 class Node():
 
     def __init__(self):
-
+        
         self.bridge = CvBridge()
 
         sub_image = message_filters.Subscriber("/rgb/image_raw", Image, queue_size=1, buff_size=2**24)
@@ -72,19 +71,21 @@ class Node():
 
 
     def calibration_func(self,marker_to_c_dic,joint_to_base_dic):
-        #res
+        # in this script there is no marker to ee infomation.
+        # just use a simple multiplication instead
         res ={}
+        if len(marker_to_c_dic)==0:
+            return "i cannot see any marker now"
+
         for i in marker_to_c_dic:
             try:
                 T_marker_to_camera  = marker_to_c_dic[i]
                 T_joint_to_base     = joint_to_base_dic[i]
-                T_marker_to_ee      = marker_to_ee_dic[i]
-                T_marker_to_camera_inv = np.linalg(T_marker_to_camera)
-                res_tmp = (T_joint_to_base.dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
+                res_tmp = T_joint_to_base.dot(T_marker_to_camera)
 
                 res[i] = res_tmp
             except:
-                print("not enough!")
+                print("not enough argument")
 
         return res
 

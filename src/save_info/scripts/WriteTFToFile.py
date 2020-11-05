@@ -33,7 +33,7 @@ class Node():
         while not rospy.is_shutdown():
             try:
                 (trans,rot) = listener.lookupTransform('/panda_ar_marker', '/panda_link7', rospy.Time(0))
-      #          print (trans,rot)
+                print (trans,rot)
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                 continue
         while not rospy.is_shutdown():
