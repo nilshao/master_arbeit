@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 '''
-                                        former programm V1.0 
+                                        formal programm V1.0 
 
         in this script, i calculate the matrix using kinematic chain.
         Problem and Work to do:
