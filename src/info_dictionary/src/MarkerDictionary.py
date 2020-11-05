@@ -1,5 +1,12 @@
 #!/usr/bin/env python2.7
 
+'''
+                                        prototype programm 
+
+        in this script i read all markers from camera and save the id -> np.array in to dictionary: marker_to_c_dic
+        problem: if i lose sight of marker, still information in marker_to_c_dic because it is a global variable.
+'''
+
 import rospy
 import numpy as np
 import cv2
@@ -42,6 +49,7 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
 ee_to_base = Pose ()
 initial_pose_found = False
 
+#marker to camera pose
 marker_to_c = Pose ()
 marker_to_c_dic = {}
 
@@ -61,24 +69,23 @@ class Node():
         # log some info about the image topic
 #        rospy.loginfo(img_msg.header)
 
-
         cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
-
         pic_ori = cv_image
-
         pic_gray = cv2.cvtColor(pic_ori, cv2.COLOR_BGR2GRAY)
 
         aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_100)  # Use 5x5 dictionary to find markers
         parameters = aruco.DetectorParameters_create()  # Marker detection parameters
-
+        
+        # First initialize a PoseArry message
         # lists of ids and the corners beloning to each id
+        pose_information = PoseArray()
+        pose_information.header.frame_id = "rgb_camera_link"
+        pose_information.header.stamp = rospy.Time.now()
 
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
         if np.all(ids is not None):
-            # First initialize a PoseArry message
-            pose_information = PoseArray()
-            pose_information.header.frame_id = "rgb_camera_link"
-            pose_information.header.stamp = rospy.Time.now()
+            
+            
 
             num_of_markers = ids.size
             res = aruco.estimatePoseSingleMarkers(corners, ARUCO_SIZE_METER, (matrix_coefficients),
@@ -104,7 +111,10 @@ class Node():
                 rotation_matrix[0][3] = tvec[i][0][0]
                 rotation_matrix[1][3] = tvec[i][0][1]
                 rotation_matrix[2][3] = tvec[i][0][2]
+
+                # save the homogeneous matrix into dictionary 
                 marker_to_c_dic[ids[i][0]] = rotation_matrix
+
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
@@ -118,18 +128,24 @@ class Node():
                 marker_to_c.orientation.w = quaternion[3]
 
                 pose_information.poses.append(marker_to_c)
+
+                #beneath was a previous output information to output, a tuple@1 of tuple@2.
+                #tuple@2: markerID, markerPose(orientation(quaternion),position)
                 marker_single_info = (ids[0][i],
                                       marker_to_c.orientation.x, marker_to_c.orientation.y, marker_to_c.orientation.z, marker_to_c.orientation.w,
                                       marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
                 marker_output_msg = marker_output_msg + (marker_single_info,)
 
-            print(marker_to_c_dic)
-            # publish to the topic
+            # publish to the topic, which will be easy to visualization in RVIZ
             pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
             rate = rospy.Rate(30)  # Hz
             pub.publish(pose_information)
             rate.sleep()
+
+            #return the tuple@1, which is only useful as a output in this prototype programm
+            print(marker_to_c_dic)
             return marker_output_msg
+
         else:
             return "no marker found"
 
