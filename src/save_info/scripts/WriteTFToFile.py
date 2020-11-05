@@ -25,14 +25,15 @@ class Node():
     def __init__(self):
 
         sub_pose = rospy.Subscriber("franka_state_controller/franka_states",FrankaState, self.franka_state_callback)
-        
+
         #tf listener
         listener = tf.TransformListener()
         
-        rate = rospy.Rate(10.0)
+        rate = rospy.Rate(60.0)
         while not rospy.is_shutdown():
             try:
-                (trans,rot) = listener.lookupTransform('/panda_link3', '/panda_link1', rospy.Time(0))
+                (trans,rot) = listener.lookupTransform('/panda_ar_marker', '/panda_link7', rospy.Time(0))
+      #          print (trans,rot)
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                 continue
         while not rospy.is_shutdown():
@@ -82,14 +83,14 @@ class Node():
         except:
             print "Error: unable to start thread of Marker"
         
-        print(ee_pose)
+    #    print(ee_pose)
         rate = rospy.Rate(10) # Hz
         rate.sleep()
 
 
 if __name__ == '__main__':
     rospy.init_node("Get_TF", anonymous=True)
-    print("I am recording at a frequency of 10 Hz")
-    print("type something when you want to sample")
+#    print("I am recording at a frequency of 10 Hz")
+#    print("type something when you want to sample")
     my_node = Node()
 
