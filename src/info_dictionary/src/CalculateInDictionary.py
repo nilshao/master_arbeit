@@ -86,7 +86,6 @@ class Node():
         return dict_here
 
     def callback(self, image_topic_input,pose_topic_input):
-        print("here1")
         marker_to_ee_dic = self.calculate_marker_to_ee()
         marker_to_c_dic = self.image_callback(image_topic_input)
         joint_to_base_dic = self.franka_state_callback(pose_topic_input)
@@ -100,29 +99,17 @@ class Node():
         res ={}
         if len(marker_to_c_dic) == 0:
             return "i cannot see any marker now"
-        print("------------------------")
-        print("i can see!!!")
-        print(marker_to_ee_dic[23])
-        print("111")
-        print(marker_to_c_dic[23])
-        print("222")
-        print(joint_to_base_dic[23])
-        print("333")
-        T_marker_to_camera_inv = np.linalg(marker_to_c_dic[23])
-        print(T_marker_to_camera_inv)
-        print("=========================")
+        
         for i in marker_to_c_dic:
-            
             try:
-                
                 T_marker_to_camera  = marker_to_c_dic[i]
                 T_joint_to_base     = joint_to_base_dic[i]
                 T_marker_to_ee      = marker_to_ee_dic[i]
-                T_marker_to_camera_inv = np.linalg(T_marker_to_camera)
+                T_marker_to_camera_inv = np.linalg.inv(T_marker_to_camera)
                 res_tmp = (T_joint_to_base.dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
 
                 res[i] = res_tmp
-                print(res_tmp)
+                
             except:
                 print("not enough!")
 
