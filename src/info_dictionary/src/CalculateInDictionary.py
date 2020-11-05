@@ -44,7 +44,7 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
 
 '''
 rosrun tf tf_echo panda_ar_marker panda_link7
-At time 0.000
+
 - Translation: [-0.000, 0.159, -0.078]
 - Rotation: in Quaternion [0.653, -0.271, 0.271, 0.653]
             in RPY (radian) [1.571, -0.785, 0.000]
@@ -55,91 +55,92 @@ At time 0.000
 ee_to_base = Pose ()
 marker_to_c = Pose ()
 
-
-
 initial_pose_found = False
 
 class Node():
 
     def __init__(self):
-        
-        
         self.bridge = CvBridge()
 
+        # use approximate time synchronizing
         sub_image = message_filters.Subscriber("/rgb/image_raw", Image, queue_size=1, buff_size=2**24)
         sub_pose = message_filters.Subscriber("franka_state_controller/franka_states",FrankaState, queue_size=1, buff_size=2**24)
 
         ts = message_filters.ApproximateTimeSynchronizer([sub_image, sub_pose], queue_size=5, slop=0.1)
-        
         ts.registerCallback(self.callback)
         
         while not rospy.is_shutdown():
             rospy.spin()
 
-    def calculate_marker_to_ee(self):
-        dict_here = {}
-        matrix = quaternion_matrix([0.653, -0.271, 0.271, 0.653])
-        matrix[0][3] = 0
-        matrix[1][3] = 0.159
-        matrix[2][3] = -0.078
-        dict_here[23] = matrix
-        return dict_here
-
+    #general callback, to deal with the transformation_matrix
     def callback(self, image_topic_input,pose_topic_input):
-        marker_to_ee_dic = self.calculate_marker_to_ee()
-        marker_to_c_dic = self.image_callback(image_topic_input)
+
+        # calculate marker position relative to the joints and save in a dictionary
+        marker_to_joint_dic = self.calculate_marker_to_joint()
+
+        # calculate marker position relative to the camera and save in a dictionary
+        marker_to_camera_dic = self.image_callback(image_topic_input)
+
+        # calculate joint position relative to the base and save in a dictionary
         joint_to_base_dic = self.franka_state_callback(pose_topic_input)
 
-        calibrated_info = self.calibration_func(marker_to_ee_dic,marker_to_c_dic,joint_to_base_dic)
+        # the function to calculate calibrate information using kinematic chain
+        calibrated_info = self.calibration_func(marker_to_joint_dic,marker_to_camera_dic,joint_to_base_dic)
+        
         print(calibrated_info)
+        
+    #in this function, given the quaternion and transformation between frames and transform into 4X4 homogeneous transformation_matrix
+    def calculate_marker_to_joint(self):
 
+        transformation_matrix = quaternion_matrix([0.653, -0.271, 0.271, 0.653])
+        
+        # transformation
+        transformation_matrix[0][3] = 0
+        transformation_matrix[1][3] = 0.159
+        transformation_matrix[2][3] = -0.078
+        
+        # save the info in matrix
+        dict_here = {}
+        dict_here[23] = transformation_matrix
 
-    def calibration_func(self,marker_to_ee_dic,marker_to_c_dic,joint_to_base_dic):
-        #res
+        return dict_here
+
+    # in this function calculate the forward kinematics chain
+    def calibration_func(self,marker_to_joint_dic,marker_to_camera_dic,joint_to_base_dic):
+        
+        # result also save in a dictionary
         res ={}
-        if len(marker_to_c_dic) == 0:
+        if len(marker_to_camera_dic) == 0:
             return "i cannot see any marker now"
         
-        for i in marker_to_c_dic:
+        # iterate all the keys in the marker to camera matrix
+        for i in marker_to_camera_dic:
             try:
-                T_marker_to_camera  = marker_to_c_dic[i]
+                # kinematic chain
+                T_marker_to_camera  = marker_to_camera_dic[i]
                 T_joint_to_base     = joint_to_base_dic[i]
-                T_marker_to_ee      = marker_to_ee_dic[i]
+                T_marker_to_ee      = marker_to_joint_dic[i]
                 T_marker_to_camera_inv = np.linalg.inv(T_marker_to_camera)
-                res_tmp = (T_joint_to_base.dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
 
+                res_tmp = (T_joint_to_base.dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
                 res[i] = res_tmp
                 
             except:
-                print("not enough!")
+                print("arguments is still not enough!")
 
         return res
 
+    # in this function read end effector msg from topic
+    # deleted the quaternion calculation, find it in MarkerandTFDictionary file
+    # but may be changed to tf listener in futer   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
     def franka_state_callback(self, tf_msg):
 
-        initial_quaternion = \
-            tf.transformations.quaternion_from_matrix(
-                np.transpose(np.reshape(tf_msg.O_T_EE,
-                                        (4, 4))))
-        initial_quaternion = initial_quaternion / np.linalg.norm(initial_quaternion)
-        ee_to_base.orientation.x = initial_quaternion[0]
-        ee_to_base.orientation.y = initial_quaternion[1]
-        ee_to_base.orientation.z = initial_quaternion[2]
-        ee_to_base.orientation.w = initial_quaternion[3]
-        ee_to_base.position.x = tf_msg.O_T_EE[12]
-        ee_to_base.position.y = tf_msg.O_T_EE[13]
-        ee_to_base.position.z = tf_msg.O_T_EE[14]
         joint_to_base_dic = {}
         joint_to_base_dic[23] = np.reshape(tf_msg.O_T_EE,(4, 4))
-      #  print(joint_to_base_dic)
 
-        tf_output_msg = (ee_to_base.orientation.x,ee_to_base.orientation.y,ee_to_base.orientation.z,ee_to_base.orientation.w,
-                         ee_to_base.position.x,ee_to_base.position.y,ee_to_base.position.z)
         return  joint_to_base_dic
 
     def image_callback(self,img_msg):
-        # log some info about the image topic
-#        rospy.loginfo(img_msg.header)
 
         cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
 
@@ -153,7 +154,7 @@ class Node():
         # lists of ids and the corners beloning to each id
 
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
-        marker_to_c_dic = {}
+        marker_to_camera_dic = {}
         if np.all(ids is not None):
             # First initialize a PoseArry message
             pose_information = PoseArray()
@@ -173,7 +174,7 @@ class Node():
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i][0], tvec[i][0], 0.1)
 
-                # we need a homogeneous matrix but OpenCV only gives us a 3x3 rotation matrix
+                # we need a homogeneous transformation_matrix but OpenCV only gives us a 3x3 rotation transformation_matrix
                 rotation_matrix = np.array([[0, 0, 0, 0],
                                             [0, 0, 0, 0],
                                             [0, 0, 0, 0],
@@ -185,9 +186,9 @@ class Node():
                 rotation_matrix[0][3] = tvec[i][0][0]
                 rotation_matrix[1][3] = tvec[i][0][1]
                 rotation_matrix[2][3] = tvec[i][0][2]
-                marker_to_c_dic[ids[i][0]] = rotation_matrix
+                marker_to_camera_dic[ids[i][0]] = rotation_matrix
 
-                # convert the matrix to a quaternion
+                # convert the transformation_matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
                 marker_to_c.position.x = float(tvec[i][0][0])
@@ -205,15 +206,15 @@ class Node():
                                       marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
                 marker_output_msg = marker_output_msg + (marker_single_info,)
 
-      #      print(marker_to_c_dic)
+      #      print(marker_to_camera_dic)
             # publish to the topic
             pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
             rate = rospy.Rate(30)  # Hz
             pub.publish(pose_information)
             rate.sleep()
-            return marker_to_c_dic
+            return marker_to_camera_dic
         else:
-            return marker_to_c_dic
+            return marker_to_camera_dic
 
 if __name__ == '__main__':
     rospy.init_node("Get_Pic", anonymous=True)
