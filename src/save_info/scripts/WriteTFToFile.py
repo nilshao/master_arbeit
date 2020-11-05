@@ -18,14 +18,23 @@ from geometry_msgs.msg import PoseStamped
 from franka_msgs.msg import FrankaState
 
 from rospy import init_node, is_shutdown
-marker_pose = Pose ()
+ee_pose = Pose ()
 
 class Node():
 
     def __init__(self):
 
         sub_pose = rospy.Subscriber("franka_state_controller/franka_states",FrankaState, self.franka_state_callback)
-
+        
+        #tf listener
+        listener = tf.TransformListener()
+        
+        rate = rospy.Rate(10.0)
+        while not rospy.is_shutdown():
+            try:
+                (trans,rot) = listener.lookupTransform('/panda_link3', '/panda_link1', rospy.Time(0))
+            except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+                continue
         while not rospy.is_shutdown():
             rospy.spin()
 
@@ -55,24 +64,25 @@ class Node():
                 np.transpose(np.reshape(msg.O_T_EE,
                                         (4, 4))))
         initial_quaternion = initial_quaternion / np.linalg.norm(initial_quaternion)
-        marker_pose.orientation.x = initial_quaternion[0]
-        marker_pose.orientation.y = initial_quaternion[1]
-        marker_pose.orientation.z = initial_quaternion[2]
-        marker_pose.orientation.w = initial_quaternion[3]
+        ee_pose.orientation.x = initial_quaternion[0]
+        ee_pose.orientation.y = initial_quaternion[1]
+        ee_pose.orientation.z = initial_quaternion[2]
+        ee_pose.orientation.w = initial_quaternion[3]
 
-        marker_pose.position.x = msg.O_T_EE[12]
-        marker_pose.position.y = msg.O_T_EE[13]
-        marker_pose.position.z = msg.O_T_EE[14]
+        ee_pose.position.x = msg.O_T_EE[12]
+        ee_pose.position.y = msg.O_T_EE[13]
+        ee_pose.position.z = msg.O_T_EE[14]
 
         global initial_pose_found
         initial_pose_found = True
-
+        
         try:
-            thread.start_new_thread( self.RecordAllPosition, (marker_pose.orientation,marker_pose.position) )
-            thread.start_new_thread( self.RecordWhenInput, (marker_pose.orientation,marker_pose.position) )
+            thread.start_new_thread( self.RecordAllPosition, (ee_pose.orientation,ee_pose.position) )
+            thread.start_new_thread( self.RecordWhenInput, (ee_pose.orientation,ee_pose.position) )
         except:
             print "Error: unable to start thread of Marker"
-
+        
+        print(ee_pose)
         rate = rospy.Rate(10) # Hz
         rate.sleep()
 
