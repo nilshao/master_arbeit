@@ -54,12 +54,13 @@ class Node():
         while not rospy.is_shutdown():
             rospy.spin()
 
-    def callback(self, image_topic_input,pose_topic_input):
+    def callback(self, image_topic_input):
         image_callback_info = self.image_callback(image_topic_input)
 
     def image_callback(self,img_msg):
         # log some info about the image topic
 #        rospy.loginfo(img_msg.header)
+
 
         cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
 
@@ -87,7 +88,7 @@ class Node():
             #  markerPoints=res[2]
 
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
-            marker_output_msg = ()
+            marker_output_msg = ()          # tuple to save the markers
             for i in range(0, ids.size):  # Iterate in markers
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i][0], tvec[i][0], 0.1)
@@ -98,11 +99,12 @@ class Node():
                                             [0, 0, 0, 0],
                                             [0, 0, 0, 1]],
                                            dtype=float)
+
                 rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i][0])
                 rotation_matrix[0][3] = tvec[i][0][0]
                 rotation_matrix[1][3] = tvec[i][0][1]
                 rotation_matrix[2][3] = tvec[i][0][2]
-                marker_to_c_dic[ids[i]] == rotation_matrix
+                marker_to_c_dic[ids[i][0]] = rotation_matrix
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
@@ -121,7 +123,7 @@ class Node():
                                       marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
                 marker_output_msg = marker_output_msg + (marker_single_info,)
 
-
+            print(marker_to_c_dic)
             # publish to the topic
             pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
             rate = rospy.Rate(30)  # Hz

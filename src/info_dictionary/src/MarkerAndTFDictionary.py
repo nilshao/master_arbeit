@@ -41,9 +41,9 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
 #initialize for writing information
 ee_to_base = Pose ()
 marker_to_c = Pose ()
-marker_to_c_dic = {}
+
 marker_to_ee_dic = {}
-joint_to_base_dic = {}
+
 initial_pose_found = False
 
 class Node():
@@ -64,22 +64,27 @@ class Node():
 
 
     def callback(self, image_topic_input,pose_topic_input):
-        image_callback_info = self.image_callback(image_topic_input)
-        pose_callback_info = self.franka_state_callback(pose_topic_input)
+        marker_to_c_dic = self.image_callback(image_topic_input)
+        joint_to_base_dic = self.franka_state_callback(pose_topic_input)
 
-        calibrated_info = self.calibration_func()
+        calibrated_info = self.calibration_func(marker_to_c_dic,joint_to_base_dic)
         print(calibrated_info)
 
-    def calibration_func(self):
+
+    def calibration_func(self,marker_to_c_dic,joint_to_base_dic):
         #res
         res ={}
         for i in marker_to_c_dic:
-            T_marker_to_camera  = marker_to_c_dic[i]
-            T_joint_to_base     = joint_to_base_dic[i]
-            T_marker_to_ee      = marker_to_ee_dic[i]
-            T_marker_to_camera_inv = np.linalg(T_marker_to_camera)
-            res_tmp = (T_joint_to_base.dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
-            res[i] = res_tmp
+            try:
+                T_marker_to_camera  = marker_to_c_dic[i]
+                T_joint_to_base     = joint_to_base_dic[i]
+                T_marker_to_ee      = marker_to_ee_dic[i]
+                T_marker_to_camera_inv = np.linalg(T_marker_to_camera)
+                res_tmp = (T_joint_to_base.dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
+
+                res[i] = res_tmp
+            except:
+                print("not enough!")
 
         return res
 
@@ -97,10 +102,13 @@ class Node():
         ee_to_base.position.x = tf_msg.O_T_EE[12]
         ee_to_base.position.y = tf_msg.O_T_EE[13]
         ee_to_base.position.z = tf_msg.O_T_EE[14]
+        joint_to_base_dic = {}
+        joint_to_base_dic[23] = np.reshape(tf_msg.O_T_EE,(4, 4))
+      #  print(joint_to_base_dic)
 
         tf_output_msg = (ee_to_base.orientation.x,ee_to_base.orientation.y,ee_to_base.orientation.z,ee_to_base.orientation.w,
                          ee_to_base.position.x,ee_to_base.position.y,ee_to_base.position.z)
-        return tf_output_msg
+        return  joint_to_base_dic
 
     def image_callback(self,img_msg):
         # log some info about the image topic
@@ -118,6 +126,7 @@ class Node():
         # lists of ids and the corners beloning to each id
 
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
+        marker_to_c_dic = {}
         if np.all(ids is not None):
             # First initialize a PoseArry message
             pose_information = PoseArray()
@@ -148,7 +157,7 @@ class Node():
                 rotation_matrix[0][3] = tvec[i][0][0]
                 rotation_matrix[1][3] = tvec[i][0][1]
                 rotation_matrix[2][3] = tvec[i][0][2]
-                marker_to_c_dic[ids[i]] == rotation_matrix
+                marker_to_c_dic[ids[i][0]] = rotation_matrix
 
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
@@ -168,15 +177,15 @@ class Node():
                                       marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
                 marker_output_msg = marker_output_msg + (marker_single_info,)
 
-            print(marker_output_msg)
+      #      print(marker_to_c_dic)
             # publish to the topic
             pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
             rate = rospy.Rate(30)  # Hz
             pub.publish(pose_information)
             rate.sleep()
-            return marker_output_msg
+            return marker_to_c_dic
         else:
-            return "no marker found"
+            return marker_to_c_dic
 
 if __name__ == '__main__':
     rospy.init_node("Get_Pic", anonymous=True)
