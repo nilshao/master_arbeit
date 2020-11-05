@@ -65,6 +65,7 @@ class Node():
         output_matrix[0][3] = tmp2[0][0]
         output_matrix[1][3] = tmp2[1][0]
         output_matrix[2][3] = tmp2[2][0]
+
         return output_matrix
 
     def image_callback(self,img_msg):

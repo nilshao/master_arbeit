@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/HomoTrans.dir/src/HomoTrans.cpp.o"
-  "/home/zmc/Desktop/master_arbeit/devel/lib/pic_reader/HomoTrans.pdb"
-  "/home/zmc/Desktop/master_arbeit/devel/lib/pic_reader/HomoTrans"
+  "/home/sibohao/Desktop/master_arbeit/devel/lib/pic_reader/HomoTrans.pdb"
+  "/home/sibohao/Desktop/master_arbeit/devel/lib/pic_reader/HomoTrans"
 )
 
 # Per-language clean rules from dependency scanning.

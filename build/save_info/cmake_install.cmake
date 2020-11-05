@@ -1,8 +1,8 @@
-# Install script for directory: /home/zmc/Desktop/master_arbeit/src/save_info
+# Install script for directory: /home/sibohao/Desktop/master_arbeit/src/save_info
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/zmc/Desktop/master_arbeit/install")
+  set(CMAKE_INSTALL_PREFIX "/home/sibohao/Desktop/master_arbeit/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Release")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zmc/Desktop/master_arbeit/build/save_info/catkin_generated/installspace/save_info.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/sibohao/Desktop/master_arbeit/build/save_info/catkin_generated/installspace/save_info.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/save_info/cmake" TYPE FILE FILES
-    "/home/zmc/Desktop/master_arbeit/build/save_info/catkin_generated/installspace/save_infoConfig.cmake"
-    "/home/zmc/Desktop/master_arbeit/build/save_info/catkin_generated/installspace/save_infoConfig-version.cmake"
+    "/home/sibohao/Desktop/master_arbeit/build/save_info/catkin_generated/installspace/save_infoConfig.cmake"
+    "/home/sibohao/Desktop/master_arbeit/build/save_info/catkin_generated/installspace/save_infoConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/save_info" TYPE FILE FILES "/home/zmc/Desktop/master_arbeit/src/save_info/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/save_info" TYPE FILE FILES "/home/sibohao/Desktop/master_arbeit/src/save_info/package.xml")
 endif()
 

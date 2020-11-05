@@ -1,0 +1,8 @@
+prefix=/home/sibohao/Desktop/master_arbeit/devel
+
+Name: info_dictionary
+Description: Description of info_dictionary
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
