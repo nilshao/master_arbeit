@@ -30,13 +30,42 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
                                     1.499117374420166,      0.39795395731925964,    -2.4385111331939697,        1.4303737878799438])
 
 class Node():
+    '''
+    A = [ M   b  ]
+        [ 0   1  ]
+    where A is 4x4, M is 3x3, b is 3x1, and the bottom row is (0,0,0,1), then
 
+    inv(A) = [ inv(M)   -inv(M) * b ]
+            [   0            1     ]
+    '''
+   
     def __init__(self):
         self.bridge = CvBridge()
         sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
 
         while not rospy.is_shutdown():
             rospy.spin()
+            
+    def affine_transformation_inverse(self,input_matrix):
+  #      np.linalg.inv(rotation_matrix)
+        output_matrix = np.array([[0, 0, 0, 0],
+                                [0, 0, 0, 0],
+                                [0, 0, 0, 0],
+                                [0, 0, 0, 1]],
+                                dtype=float)
+        
+        output_matrix[:3, :3] = np.linalg.inv(input_matrix[:3, :3])
+        tmp = output_matrix[:3, :3]
+        b = np.array([[input_matrix[0][3]], 
+                        [input_matrix[1][3]], 
+                        [input_matrix[2][3]]])
+        
+        tmp2 = -tmp.dot(b)
+        
+        output_matrix[0][3] = tmp2[0][0]
+        output_matrix[1][3] = tmp2[1][0]
+        output_matrix[2][3] = tmp2[2][0]
+        return output_matrix
 
     def image_callback(self,img_msg):
         # log some info about the image topic
@@ -78,7 +107,12 @@ class Node():
                                             [0, 0, 0, 1]],
                                             dtype=float)
                 rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i][0])
-
+                rotation_matrix[0][3] = tvec[i][0][0]
+                rotation_matrix[1][3] = tvec[i][0][1]
+                rotation_matrix[2][3] = tvec[i][0][2]
+                inv_rotation = self.affine_transformation_inverse(rotation_matrix)
+                print (rotation_matrix)
+                print (inv_rotation)
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
