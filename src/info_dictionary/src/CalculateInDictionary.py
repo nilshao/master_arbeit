@@ -61,7 +61,11 @@ rosrun tf tf_echo /panda_link8 /panda_ar_mark
 #initialize for writing information
 ee_to_base = Pose ()
 marker_to_c = Pose ()
+
 camera_to_base_pose_stamped = PoseStamped()
+base_camera_marker_stamped = PoseStamped()
+ee_to_base_pose_stamped = PoseStamped()
+
 initial_pose_found = False
 
 class Node():
@@ -93,36 +97,69 @@ class Node():
         joint_to_base_dic = self.franka_state_callback(pose_topic_input)
 
         # the function to calculate calibrate information using kinematic chain
-        calibrated_base_to_camera = self.calibration_func(marker_to_joint_dic,marker_to_camera_dic,joint_to_base_dic)
+        calibrated_cam_to_base = self.calibration_func(marker_to_joint_dic,marker_to_camera_dic,joint_to_base_dic)
 
         # to record the calibration info in a txt file, just might be useful
- #       self.RecordCaliInfo(calibrated_base_to_camera)
+ #       self.RecordCaliInfo(calibrated_cam_to_base)
 
- #       print(calibrated_base_to_camera)
+        # check if the position of marker can align by base -> cam -> marker chain
+        base_camera_marker = self.base_camera_marker_func(calibrated_cam_to_base,marker_to_joint_dic,marker_to_camera_dic,joint_to_base_dic)
+ #       print(calibrated_cam_to_base)
 
         camera_to_base_pose_stamped.header.frame_id = "panda_link0"
         camera_to_base_pose_stamped.header.stamp = rospy.Time.now()
 
+        base_camera_marker_stamped.header.frame_id = "panda_link0"
+        base_camera_marker_stamped.header.stamp = rospy.Time.now()
+
         try:
-            quaternion_cam2base = tf.transformations.quaternion_from_matrix(calibrated_base_to_camera[582])
-            print(calibrated_base_to_camera[582][:3, :3])
-            
-            camera_to_base_pose_stamped.pose.position.x = calibrated_base_to_camera[582][0][3]
-            camera_to_base_pose_stamped.pose.position.y = calibrated_base_to_camera[582][1][3]
-            camera_to_base_pose_stamped.pose.position.z = calibrated_base_to_camera[582][2][3]
-            camera_to_base_pose_stamped.pose.orientation.x = quaternion_cam2base[0]
-            camera_to_base_pose_stamped.pose.orientation.y = quaternion_cam2base[1]
-            camera_to_base_pose_stamped.pose.orientation.z = quaternion_cam2base[2]
-            camera_to_base_pose_stamped.pose.orientation.w = quaternion_cam2base[3]
+            camera_to_base_pose_stamped.pose = self.MatrixToPoseStamped(calibrated_cam_to_base[582])
+            base_camera_marker_stamped.pose = self.MatrixToPoseStamped(base_camera_marker[582])
         except:
             print("its not a dict")
 
-        pub = rospy.Publisher('CameraToBase', PoseStamped, queue_size=1)
+
+
+        pub1 = rospy.Publisher('CameraToBase', PoseStamped, queue_size=1)
+        pub2 = rospy.Publisher('BaseCameraMarker', PoseStamped, queue_size=1)
         rate = rospy.Rate(30)  # Hz
-        pub.publish(camera_to_base_pose_stamped)
+        pub1.publish(camera_to_base_pose_stamped)
+        pub2.publish(base_camera_marker_stamped)
         rate.sleep()
+        
+    def base_camera_marker_func(self,camera_to_base_dic, marker_to_joint_dic,marker_to_camera_dic,joint_to_base_dic):
 
+        # result also save in a dictionary
+        res ={}
+        if len(marker_to_camera_dic) == 0:
+            return "i cannot see any marker now"
 
+        # iterate all the keys in the marker to camera matrix
+        for i in marker_to_camera_dic:
+
+            try:
+                # kinematic chain
+                T_marker_to_camera  = marker_to_camera_dic[i]
+                T_camera_to_base = camera_to_base_dic[i]
+
+                res_tmp = (T_camera_to_base).dot(T_marker_to_camera)
+                res[i] = res_tmp
+
+            except:
+                print("arguments is still not enough!")
+
+        return res
+    def MatrixToPoseStamped(self, matrix):
+        pose_part = Pose()
+        quaternion = tf.transformations.quaternion_from_matrix(matrix)
+        pose_part.position.x = matrix[0][3]
+        pose_part.position.y = matrix[1][3]
+        pose_part.position.z = matrix[2][3]
+        pose_part.orientation.x = quaternion[0]
+        pose_part.orientation.y = quaternion[1]
+        pose_part.orientation.z = quaternion[2]
+        pose_part.orientation.w = quaternion[3]
+        return pose_part
     def RecordCaliInfo(self, calibrated_base_to_camera):
         CaliRecorder = open("CalibrateYo.txt", "a")
 
@@ -171,9 +208,10 @@ class Node():
         res ={}
         if len(marker_to_camera_dic) == 0:
             return "i cannot see any marker now"
-        
+
         # iterate all the keys in the marker to camera matrix
         for i in marker_to_camera_dic:
+
             try:
                 # kinematic chain
                 T_marker_to_camera  = marker_to_camera_dic[i]
@@ -182,7 +220,7 @@ class Node():
                 T_marker_to_camera_inv = np.linalg.inv(T_marker_to_camera)
 
                 #get camera to base
-                res_tmp = ((T_marker_to_camera_inv).dot(T_marker_to_ee)).dot(T_joint_to_base)
+                res_tmp = ((T_joint_to_base).dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
                 res[i] = res_tmp
                 
             except:
@@ -204,7 +242,6 @@ class Node():
         cv_image = self.bridge.imgmsg_to_cv2(img_msg, "passthrough")
 
         pic_ori = cv_image
-
         pic_gray = cv2.cvtColor(pic_ori, cv2.COLOR_BGR2GRAY)
 
         aruco_dict = aruco.Dictionary_get(aruco.DICT_5X5_100)  # Use 5x5 dictionary to find markers
@@ -214,6 +251,8 @@ class Node():
 
         corners, ids, rejected_img_points = aruco.detectMarkers(pic_gray,ARUCO_DICTIONARY,parameters = parameters)
         marker_to_camera_dic = {}
+        aruco.drawDetectedMarkers(pic_gray, corners)
+
         if np.all(ids is not None):
             # First initialize a PoseArry message
             pose_information = PoseArray()
@@ -264,7 +303,8 @@ class Node():
                                       marker_to_c.orientation.x, marker_to_c.orientation.y, marker_to_c.orientation.z, marker_to_c.orientation.w,
                                       marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
                 marker_output_msg = marker_output_msg + (marker_single_info,)
-
+            cv2.imshow("Gray Image Window", pic_gray)
+            cv2.waitKey(1)
       #      print(marker_to_camera_dic)
             # publish to the topic
             pub = rospy.Publisher('MarkerPositionPublishing', PoseArray, queue_size=1)
