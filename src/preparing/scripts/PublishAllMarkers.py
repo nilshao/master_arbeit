@@ -16,8 +16,12 @@ from geometry_msgs.msg import PoseStamped
 
 # Constant parameters used in Aruco methods
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
-ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
-ARUCO_SIZE_METER = 0.0996
+
+#ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
+#ARUCO_SIZE_METER = 0.0996
+
+ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_ARUCO_ORIGINAL)
+ARUCO_SIZE_METER = 0.085
 
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
@@ -68,6 +72,8 @@ class Node():
             aruco.drawDetectedMarkers(pic_gray, corners)  # Draw A square around the markers
             for i in range(0, ids.size):  # Iterate in markers
                 # Estimate pose of each marker and return the values rvec and tvec---different from camera coefficients
+		print("rvec is: ",rvec[i][0])
+                print("tvec is: ",tvec[i][0])
                 aruco.drawAxis(pic_gray, matrix_coefficients, distortion_coefficients, rvec[i][0], tvec[i][0], 0.1)
 
                 # we need a homogeneous matrix but OpenCV only gives us a 3x3 rotation matrix
@@ -94,7 +100,6 @@ class Node():
                 single_pose.orientation.w = quaternion[3]
 
                 pose_information.poses.append(single_pose)
-
         cv2.imshow("Gray Image Window", pic_gray)
         cv2.waitKey(1)
         

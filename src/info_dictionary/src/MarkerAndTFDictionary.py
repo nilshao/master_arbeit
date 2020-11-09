@@ -70,6 +70,9 @@ class Node():
         print(calibrated_info)
 
 
+
+
+
     def calibration_func(self,marker_to_c_dic,joint_to_base_dic):
         # in this script there is no marker to ee infomation.
         # just use a simple multiplication instead

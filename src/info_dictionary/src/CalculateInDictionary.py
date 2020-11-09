@@ -1,7 +1,6 @@
 #!/usr/bin/env python2.7
 '''
-                                        formal programm V1.0 
-
+                                        formal programm V1.0
         in this script, i calculate the matrix using kinematic chain.
         Problem and Work to do:
             1. test the inverse of a 4X4 homogeneous matrix
@@ -31,9 +30,12 @@ from rospy import init_node, is_shutdown
 
 # Constant parameters used in Aruco methods
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
+'''
 ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
 ARUCO_SIZE_METER = 0.0996
-
+'''
+ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_ARUCO_ORIGINAL)
+ARUCO_SIZE_METER = 0.0834
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
 
@@ -50,23 +52,22 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
 
 
 '''
-rosrun tf tf_echo panda_ar_marker panda_link7
+rosrun tf tf_echo /panda_link8 /panda_ar_mark
 
-- Translation: [-0.000, 0.159, -0.078]
-- Rotation: in Quaternion [0.653, -0.271, 0.271, 0.653]
-            in RPY (radian) [1.571, -0.785, 0.000]
-            in RPY (degree) [89.999, -45.000, 0.000]
+- Translation: [0.055, 0.055, 0.052]
+- Rotation: in Quaternion [-0.653, 0.271, -0.271, 0.653]
 '''
 
 #initialize for writing information
 ee_to_base = Pose ()
 marker_to_c = Pose ()
-
+camera_to_base_pose_stamped = PoseStamped()
 initial_pose_found = False
 
 class Node():
 
     def __init__(self):
+
         self.bridge = CvBridge()
 
         # use approximate time synchronizing
@@ -92,23 +93,74 @@ class Node():
         joint_to_base_dic = self.franka_state_callback(pose_topic_input)
 
         # the function to calculate calibrate information using kinematic chain
-        calibrated_info = self.calibration_func(marker_to_joint_dic,marker_to_camera_dic,joint_to_base_dic)
-        
-        print(calibrated_info)
-        
+        calibrated_base_to_camera = self.calibration_func(marker_to_joint_dic,marker_to_camera_dic,joint_to_base_dic)
+
+        # to record the calibration info in a txt file, just might be useful
+ #       self.RecordCaliInfo(calibrated_base_to_camera)
+
+ #       print(calibrated_base_to_camera)
+
+        camera_to_base_pose_stamped.header.frame_id = "panda_link0"
+        camera_to_base_pose_stamped.header.stamp = rospy.Time.now()
+
+        try:
+            quaternion_cam2base = tf.transformations.quaternion_from_matrix(calibrated_base_to_camera[582])
+            print(calibrated_base_to_camera[582][:3, :3])
+            
+            camera_to_base_pose_stamped.pose.position.x = calibrated_base_to_camera[582][0][3]
+            camera_to_base_pose_stamped.pose.position.y = calibrated_base_to_camera[582][1][3]
+            camera_to_base_pose_stamped.pose.position.z = calibrated_base_to_camera[582][2][3]
+            camera_to_base_pose_stamped.pose.orientation.x = quaternion_cam2base[0]
+            camera_to_base_pose_stamped.pose.orientation.y = quaternion_cam2base[1]
+            camera_to_base_pose_stamped.pose.orientation.z = quaternion_cam2base[2]
+            camera_to_base_pose_stamped.pose.orientation.w = quaternion_cam2base[3]
+        except:
+            print("its not a dict")
+
+        pub = rospy.Publisher('CameraToBase', PoseStamped, queue_size=1)
+        rate = rospy.Rate(30)  # Hz
+        pub.publish(camera_to_base_pose_stamped)
+        rate.sleep()
+
+
+    def RecordCaliInfo(self, calibrated_base_to_camera):
+        CaliRecorder = open("CalibrateYo.txt", "a")
+
+        if isinstance(calibrated_base_to_camera, dict):
+            print("recording")
+            # marker id
+            CaliRecorder.write("582 \n")
+            # rot
+            CaliRecorder.write("%5.8f %5.8f %5.8f \n" % (
+                calibrated_base_to_camera[582][0][0], calibrated_base_to_camera[582][0][1],
+                calibrated_base_to_camera[582][0][2]))
+            CaliRecorder.write("%5.8f %5.8f %5.8f \n" % (
+                calibrated_base_to_camera[582][1][0], calibrated_base_to_camera[582][1][1],
+                calibrated_base_to_camera[582][1][2]))
+            CaliRecorder.write("%5.8f %5.8f %5.8f \n" % (
+                calibrated_base_to_camera[582][2][0], calibrated_base_to_camera[582][2][1],
+                calibrated_base_to_camera[582][2][2]))
+            # trans
+            CaliRecorder.write("%5.8f %5.8f %5.8f \n" % (
+                calibrated_base_to_camera[582][0][3], calibrated_base_to_camera[582][1][3],
+                calibrated_base_to_camera[582][2][3]))
+        else:
+            CaliRecorder.write("no marker found")
+        CaliRecorder.write("----------------------------------------------------------------------------------------------- \n")
+        CaliRecorder.close()
+
     #in this function, given the quaternion and transformation between frames and transform into 4X4 homogeneous transformation_matrix
     def calculate_marker_to_joint(self):
+        transformation_matrix = quaternion_matrix([-0.653, 0.271, -0.271, 0.653])
 
-        transformation_matrix = quaternion_matrix([0.653, -0.271, 0.271, 0.653])
-        
         # transformation
-        transformation_matrix[0][3] = 0
-        transformation_matrix[1][3] = 0.159
-        transformation_matrix[2][3] = -0.078
+        transformation_matrix[0][3] = 0.055
+        transformation_matrix[1][3] = 0.055
+        transformation_matrix[2][3] = 0.052
         
         # save the info in matrix
         dict_here = {}
-        dict_here[23] = transformation_matrix
+        dict_here[582] = transformation_matrix
 
         return dict_here
 
@@ -129,7 +181,8 @@ class Node():
                 T_marker_to_ee      = marker_to_joint_dic[i]
                 T_marker_to_camera_inv = np.linalg.inv(T_marker_to_camera)
 
-                res_tmp = (T_joint_to_base.dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
+                #get camera to base
+                res_tmp = ((T_marker_to_camera_inv).dot(T_marker_to_ee)).dot(T_joint_to_base)
                 res[i] = res_tmp
                 
             except:
@@ -141,9 +194,8 @@ class Node():
     # deleted the quaternion calculation, find it in MarkerandTFDictionary file
     # but may be changed to tf listener in futer   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
     def franka_state_callback(self, tf_msg):
-
         joint_to_base_dic = {}
-        joint_to_base_dic[23] = np.reshape(tf_msg.O_T_EE,(4, 4))
+        joint_to_base_dic[582] = np.transpose(np.reshape(tf_msg.O_T_EE,(4, 4)))
 
         return  joint_to_base_dic
 
@@ -208,7 +260,7 @@ class Node():
                 marker_to_c.orientation.w = quaternion[3]
 
                 pose_information.poses.append(marker_to_c)
-                marker_single_info = (ids[0][i],
+                marker_single_info = (ids[i][0],
                                       marker_to_c.orientation.x, marker_to_c.orientation.y, marker_to_c.orientation.z, marker_to_c.orientation.w,
                                       marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
                 marker_output_msg = marker_output_msg + (marker_single_info,)
@@ -224,7 +276,7 @@ class Node():
             return marker_to_camera_dic
 
 if __name__ == '__main__':
-    rospy.init_node("Get_Pic", anonymous=True)
+    rospy.init_node("Calibration", anonymous=True)
     my_node = Node()
 #    my_node.start()
 

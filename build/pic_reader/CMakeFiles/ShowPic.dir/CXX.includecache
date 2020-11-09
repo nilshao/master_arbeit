@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/sibohao/Desktop/master_arbeit/src/pic_reader/src/ShowPic.cpp
+/home/zmc/Desktop/master_arbeit/src/pic_reader/src/ShowPic.cpp
 ros/ros.h
 -
 image_transport/image_transport.h

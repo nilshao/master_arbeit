@@ -10,8 +10,10 @@ from sensor_msgs.msg import Image
 
 # Constant parameters used in Aruco methods
 ARUCO_PARAMETERS = aruco.DetectorParameters_create()
-ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
-
+# marker1: 10cm
+#ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_5X5_100)
+# marker2
+ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_ARUCO_ORIGINAL)
 
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None

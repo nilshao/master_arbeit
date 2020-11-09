@@ -1,8 +1,8 @@
-# Install script for directory: /home/sibohao/Desktop/master_arbeit/src/info_dictionary
+# Install script for directory: /home/zmc/Desktop/master_arbeit/src/info_dictionary
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/sibohao/Desktop/master_arbeit/install")
+  set(CMAKE_INSTALL_PREFIX "/home/zmc/Desktop/master_arbeit/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/sibohao/Desktop/master_arbeit/build/info_dictionary/catkin_generated/installspace/info_dictionary.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/zmc/Desktop/master_arbeit/build/info_dictionary/catkin_generated/installspace/info_dictionary.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/info_dictionary/cmake" TYPE FILE FILES
-    "/home/sibohao/Desktop/master_arbeit/build/info_dictionary/catkin_generated/installspace/info_dictionaryConfig.cmake"
-    "/home/sibohao/Desktop/master_arbeit/build/info_dictionary/catkin_generated/installspace/info_dictionaryConfig-version.cmake"
+    "/home/zmc/Desktop/master_arbeit/build/info_dictionary/catkin_generated/installspace/info_dictionaryConfig.cmake"
+    "/home/zmc/Desktop/master_arbeit/build/info_dictionary/catkin_generated/installspace/info_dictionaryConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/info_dictionary" TYPE FILE FILES "/home/sibohao/Desktop/master_arbeit/src/info_dictionary/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/info_dictionary" TYPE FILE FILES "/home/zmc/Desktop/master_arbeit/src/info_dictionary/package.xml")
 endif()
 

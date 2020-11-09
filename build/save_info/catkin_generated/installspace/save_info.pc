@@ -1,4 +1,4 @@
-prefix=/home/sibohao/Desktop/master_arbeit/install
+prefix=/home/zmc/Desktop/master_arbeit/install
 
 Name: save_info
 Description: Description of save_info
