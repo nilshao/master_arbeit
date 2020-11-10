@@ -50,7 +50,6 @@ distortion_coefficients = np.array([0.5164358615875244,     -2.606694221496582, 
 #from end effector to marker:
 #rpy and xyz:
 
-
 '''
 rosrun tf tf_echo /panda_link8 /panda_ar_mark
 

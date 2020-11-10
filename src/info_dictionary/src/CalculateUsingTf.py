@@ -139,6 +139,7 @@ def image_callback(img_msg):
         rate.sleep()
 
 def tf_to_dic_func(tf_listener):
+
     (position, quaternion) = tf_listener.lookupTransform("/panda_link0", "/panda_link8", rospy.Time(0))
     transformation_matrix = quaternion_matrix(quaternion)
 
@@ -148,6 +149,7 @@ def tf_to_dic_func(tf_listener):
     transformation_matrix[2][3] = position[2]
     dict_here = {}
     dict_here[582] = transformation_matrix
+
     return dict_here
 
 def calibration_func(marker_to_joint_dic, marker_to_camera_dic, joint_to_base_dic):
@@ -163,11 +165,12 @@ def calibration_func(marker_to_joint_dic, marker_to_camera_dic, joint_to_base_di
             # kinematic chain
             T_marker_to_camera = marker_to_camera_dic[i]
             T_joint_to_base = joint_to_base_dic[i]
-            T_marker_to_ee = marker_to_joint_dic[i]
+            T_marker_to_joint = marker_to_joint_dic[i]
             T_marker_to_camera_inv = np.linalg.inv(T_marker_to_camera)
 
             # get camera to base
-            res_tmp = ((T_joint_to_base).dot(T_marker_to_ee)).dot(T_marker_to_camera_inv)
+            res_tmp = ((T_joint_to_base).dot(T_marker_to_joint)).dot(T_marker_to_camera_inv)
+            res_tmp = ((T_marker_to_camera_inv).dot(T_marker_to_joint)).dot(T_joint_to_base)
             res[i] = res_tmp
 
         except:
@@ -199,6 +202,7 @@ def MatrixToPoseStamped(matrix):
     pose_part.orientation.y = quaternion[1]
     pose_part.orientation.z = quaternion[2]
     pose_part.orientation.w = quaternion[3]
+
     return pose_part
 
 def calibration():
@@ -210,7 +214,7 @@ def calibration():
     tf_listener = tf.TransformListener()
     rate = rospy.Rate(5.0)
 
-    camera_to_base_pose_stamped.header.frame_id = "panda_link0"
+    camera_to_base_pose_stamped.header.frame_id = "/panda_link0"
     camera_to_base_pose_stamped.header.stamp = rospy.Time.now()
 
     while not rospy.is_shutdown():
@@ -220,9 +224,11 @@ def calibration():
             calibrated_cam_to_base = calibration_func(marker_to_joint_dic, marker_to_camera_dic, joint_to_base_dic)
             print(calibrated_cam_to_base)
             camera_to_base_pose_stamped.pose = MatrixToPoseStamped(calibrated_cam_to_base[582])
+
             pub1 = rospy.Publisher('CameraToBase', PoseStamped, queue_size=1)
             rate = rospy.Rate(30)  # Hz
             pub1.publish(camera_to_base_pose_stamped)
+
         except:
             print("Error!")
             continue
