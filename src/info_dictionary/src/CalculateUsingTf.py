@@ -149,6 +149,7 @@ def tf_marker_to_ee_func(tf_listener):
     transformation_matrix[0][3] = position[0]
     transformation_matrix[1][3] = position[1]
     transformation_matrix[2][3] = position[2]
+
     dict_here = {}
     dict_here[582] = transformation_matrix
 
@@ -156,7 +157,7 @@ def tf_marker_to_ee_func(tf_listener):
 
 
 def tf_marker_to_base_func(tf_listener):
-    (position, quaternion) = tf_listener.lookupTransform("/panda_ar_marker", "/panda_link0", rospy.Time(0))
+    (position, quaternion) = tf_listener.lookupTransform("/panda_link0", "/panda_ar_marker", rospy.Time(0))
     transformation_matrix = quaternion_matrix(quaternion)
 
     # transformation
@@ -177,6 +178,7 @@ def tf_joint_to_base_func(tf_listener):
     transformation_matrix[0][3] = position[0]
     transformation_matrix[1][3] = position[1]
     transformation_matrix[2][3] = position[2]
+
     dict_here = {}
     dict_here[582] = transformation_matrix
 
@@ -201,7 +203,7 @@ def calibration_func(marker_to_joint_dic, marker_to_camera_dic, joint_to_base_di
 
             # get camera to base
             res_tmp = ((T_joint_to_base).dot(T_marker_to_joint)).dot(T_marker_to_camera_inv)
-            res_tmp = ((T_marker_to_camera_inv).dot(T_marker_to_joint)).dot(T_joint_to_base)
+          #  res_tmp = ((T_marker_to_camera_inv).dot(T_marker_to_joint)).dot(T_joint_to_base)
             res[i] = res_tmp
 
         except:
@@ -246,6 +248,7 @@ def calculate_marker_to_joint():
 
     # save the info in matrix
     dict_here = {}
+
     dict_here[582] = transformation_matrix
     return dict_here
 
