@@ -1,16 +1,17 @@
 #!/usr/bin/env python2.7
+
 '''
-                                        formal programm V2.0
+                                        formal programme V2.0
         in this script, i calculate the matrix using kinematic chain.
-        with get TF function!!
+        with get TF information
 '''
+
 import rospy
 import numpy as np
 import cv2
 import cv2.aruco as aruco
 import tf
 import math
-import thread
 import time
 import message_filters
 
@@ -60,6 +61,7 @@ ee_to_base_pose_stamped = PoseStamped()
 
 initial_pose_found = False
 marker_to_camera_dic = {}
+
 
 def image_callback(img_msg):
     bridge = CvBridge()
@@ -128,7 +130,7 @@ def image_callback(img_msg):
                                   marker_to_c.orientation.w,
                                   marker_to_c.position.x, marker_to_c.position.y, marker_to_c.position.z)
             marker_output_msg = marker_output_msg + (marker_single_info,)
-     #   print(marker_to_camera_dic)
+        #   print(marker_to_camera_dic)
         cv2.imshow("Gray Image Window", pic_gray)
         cv2.waitKey(1)
         #      print(marker_to_camera_dic)
@@ -138,8 +140,36 @@ def image_callback(img_msg):
         pub.publish(pose_information)
         rate.sleep()
 
-def tf_to_dic_func(tf_listener):
 
+def tf_marker_to_ee_func(tf_listener):
+    (position, quaternion) = tf_listener.lookupTransform("/panda_link8", "/panda_ar_marker", rospy.Time(0))
+    transformation_matrix = quaternion_matrix(quaternion)
+
+    # transformation
+    transformation_matrix[0][3] = position[0]
+    transformation_matrix[1][3] = position[1]
+    transformation_matrix[2][3] = position[2]
+    dict_here = {}
+    dict_here[582] = transformation_matrix
+
+    return dict_here
+
+
+def tf_marker_to_base_func(tf_listener):
+    (position, quaternion) = tf_listener.lookupTransform("/panda_ar_marker", "/panda_link0", rospy.Time(0))
+    transformation_matrix = quaternion_matrix(quaternion)
+
+    # transformation
+    transformation_matrix[0][3] = position[0]
+    transformation_matrix[1][3] = position[1]
+    transformation_matrix[2][3] = position[2]
+    dict_here = {}
+    dict_here[582] = transformation_matrix
+
+    return dict_here
+
+
+def tf_joint_to_base_func(tf_listener):
     (position, quaternion) = tf_listener.lookupTransform("/panda_link0", "/panda_link8", rospy.Time(0))
     transformation_matrix = quaternion_matrix(quaternion)
 
@@ -151,6 +181,7 @@ def tf_to_dic_func(tf_listener):
     dict_here[582] = transformation_matrix
 
     return dict_here
+
 
 def calibration_func(marker_to_joint_dic, marker_to_camera_dic, joint_to_base_dic):
     # result also save in a dictionary
@@ -178,6 +209,33 @@ def calibration_func(marker_to_joint_dic, marker_to_camera_dic, joint_to_base_di
 
     return res
 
+
+def calibration_func2(marker_to_base_dic, marker_to_camera_dic):
+    # result also save in a dictionary
+    res = {}
+    if len(marker_to_camera_dic) == 0:
+        return "i cannot see any marker now"
+
+    # iterate all the keys in the marker to camera matrix
+    for i in marker_to_camera_dic:
+
+        try:
+            # kinematic chain
+            T_marker_to_camera = marker_to_camera_dic[i]
+            T_marker_to_base = marker_to_base_dic[i]
+            T_marker_to_camera_inv = np.linalg.inv(T_marker_to_camera)
+
+            # get camera to base
+            res_tmp = (T_marker_to_base).dot(T_marker_to_camera_inv)
+
+            res[i] = res_tmp
+
+        except:
+            print("arguments is still not enough!")
+
+    return res
+
+
 def calculate_marker_to_joint():
     transformation_matrix = quaternion_matrix([-0.653, 0.271, -0.271, 0.653])
 
@@ -191,9 +249,10 @@ def calculate_marker_to_joint():
     dict_here[582] = transformation_matrix
     return dict_here
 
-def MatrixToPoseStamped(matrix):
 
+def MatrixToPoseStamped(matrix):
     pose_part = Pose()
+
     quaternion = tf.transformations.quaternion_from_matrix(matrix)
     pose_part.position.x = matrix[0][3]
     pose_part.position.y = matrix[1][3]
@@ -205,11 +264,12 @@ def MatrixToPoseStamped(matrix):
 
     return pose_part
 
+
 def calibration():
     rospy.init_node('online_calibration')
     sub_image = rospy.Subscriber("/rgb/image_raw", Image, image_callback)
 
-    marker_to_joint_dic = calculate_marker_to_joint()
+    # marker_to_joint_dic = calculate_marker_to_joint()
 
     tf_listener = tf.TransformListener()
     rate = rospy.Rate(5.0)
@@ -219,9 +279,11 @@ def calibration():
 
     while not rospy.is_shutdown():
         try:
-            joint_to_base_dic = tf_to_dic_func(tf_listener)
-
+            joint_to_base_dic = tf_joint_to_base_func(tf_listener)
+            marker_to_joint_dic = tf_marker_to_ee_func(tf_listener)
+            marker_to_base_dic = tf_marker_to_base_func(tf_listener)
             calibrated_cam_to_base = calibration_func(marker_to_joint_dic, marker_to_camera_dic, joint_to_base_dic)
+            #     calibrated_cam_to_base = calibration_func2(marker_to_base_dic, marker_to_camera_dic)
             print(calibrated_cam_to_base)
             camera_to_base_pose_stamped.pose = MatrixToPoseStamped(calibrated_cam_to_base[582])
 
@@ -234,6 +296,7 @@ def calibration():
             continue
         rate.sleep()
     rospy.spin()
+
 
 if __name__ == '__main__':
     calibration()
