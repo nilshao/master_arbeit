@@ -21,7 +21,7 @@ ARUCO_PARAMETERS = aruco.DetectorParameters_create()
 #ARUCO_SIZE_METER = 0.0996
 
 ARUCO_DICTIONARY = aruco.Dictionary_get(aruco.DICT_ARUCO_ORIGINAL)
-ARUCO_SIZE_METER = 0.085
+ARUCO_SIZE_METER = 0.0834
 
 # Create vectors we'll be using for rotations and translations for postures
 rvec, tvec = None, None
@@ -83,7 +83,10 @@ class Node():
                                             [0, 0, 0, 1]],
                                             dtype=float)
                 rotation_matrix[:3, :3], _ = cv2.Rodrigues(rvec[i][0])
-
+                rotation_matrix[0][3] = tvec[i][0][0]
+                rotation_matrix[1][3] = tvec[i][0][1]
+                rotation_matrix[2][3] = tvec[i][0][2]
+                print rotation_matrix
                 # convert the matrix to a quaternion
                 quaternion = tf.transformations.quaternion_from_matrix(rotation_matrix)
 
