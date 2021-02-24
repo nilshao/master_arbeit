@@ -51,6 +51,12 @@ class Node():
         sub_image = rospy.Subscriber("/rgb/image_raw", Image, self.image_callback)
         sub_pose = rospy.Subscriber("franka_state_controller/franka_states",FrankaState, self.franka_state_callback)
 
+        rate = rospy.Rate(10.0)
+        while not rospy.is_shutdown():
+            try:
+                (trans,rot) = listener.lookupTransform('/link8', '/link7', rospy.Time(0))
+            except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+                continue
         while not rospy.is_shutdown():
             rospy.spin()
 
