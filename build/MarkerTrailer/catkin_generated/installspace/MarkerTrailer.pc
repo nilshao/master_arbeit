@@ -1,4 +1,4 @@
-prefix=/home/zmc/Desktop/master_arbeit/install
+prefix=/home/sibohao/Desktop/master_arbeit/install
 
 Name: MarkerTrailer
 Description: Description of MarkerTrailer

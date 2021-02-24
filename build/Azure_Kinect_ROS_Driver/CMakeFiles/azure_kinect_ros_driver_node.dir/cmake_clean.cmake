@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
+  "/home/sibohao/Desktop/master_arbeit/devel/lib/azure_kinect_ros_driver/node"
+  "/home/sibohao/Desktop/master_arbeit/devel/lib/azure_kinect_ros_driver/node.pdb"
+  "CMakeFiles/azure_kinect_ros_driver_node.dir/src/k4a_calibration_transform_data.cpp.o"
   "CMakeFiles/azure_kinect_ros_driver_node.dir/src/k4a_ros_bridge_node.cpp.o"
   "CMakeFiles/azure_kinect_ros_driver_node.dir/src/k4a_ros_device.cpp.o"
   "CMakeFiles/azure_kinect_ros_driver_node.dir/src/k4a_ros_device_params.cpp.o"
-  "CMakeFiles/azure_kinect_ros_driver_node.dir/src/k4a_calibration_transform_data.cpp.o"
-  "/home/zmc/Desktop/master_arbeit/devel/lib/azure_kinect_ros_driver/node.pdb"
-  "/home/zmc/Desktop/master_arbeit/devel/lib/azure_kinect_ros_driver/node"
 )
 
 # Per-language clean rules from dependency scanning.

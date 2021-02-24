@@ -1,0 +1,8 @@
+prefix=/home/sibohao/Desktop/master_arbeit/devel
+
+Name: vrep
+Description: Description of vrep
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

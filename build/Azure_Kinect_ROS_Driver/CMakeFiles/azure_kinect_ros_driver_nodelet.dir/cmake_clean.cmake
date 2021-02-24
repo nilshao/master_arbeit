@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
+  "/home/sibohao/Desktop/master_arbeit/devel/lib/libazure_kinect_ros_driver_nodelet.pdb"
+  "/home/sibohao/Desktop/master_arbeit/devel/lib/libazure_kinect_ros_driver_nodelet.so"
+  "CMakeFiles/azure_kinect_ros_driver_nodelet.dir/src/k4a_calibration_transform_data.cpp.o"
   "CMakeFiles/azure_kinect_ros_driver_nodelet.dir/src/k4a_ros_bridge_nodelet.cpp.o"
   "CMakeFiles/azure_kinect_ros_driver_nodelet.dir/src/k4a_ros_device.cpp.o"
   "CMakeFiles/azure_kinect_ros_driver_nodelet.dir/src/k4a_ros_device_params.cpp.o"
-  "CMakeFiles/azure_kinect_ros_driver_nodelet.dir/src/k4a_calibration_transform_data.cpp.o"
-  "/home/zmc/Desktop/master_arbeit/devel/lib/libazure_kinect_ros_driver_nodelet.pdb"
-  "/home/zmc/Desktop/master_arbeit/devel/lib/libazure_kinect_ros_driver_nodelet.so"
 )
 
 # Per-language clean rules from dependency scanning.

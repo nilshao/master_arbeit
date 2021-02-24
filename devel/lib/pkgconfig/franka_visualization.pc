@@ -1,8 +1,0 @@
-prefix=/home/zmc/Desktop/master_arbeit/devel
-
-Name: franka_visualization
-Description: Description of franka_visualization
-Version: 0.7.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: sensor_msgs roscpp
